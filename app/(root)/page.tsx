@@ -597,6 +597,16 @@ function FeatureGrid() {
             </div>
           </div>
         </div>
+
+        <div className="flex justify-center">
+          <Image
+            src="/backgrounds/mission-flow-chart.svg"
+            alt="Logo"
+            width={1200}
+            height={800}
+            className="h-auto max-w-full"
+          />
+        </div>
       </div>
     </div>
   );
