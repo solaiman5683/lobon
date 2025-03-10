@@ -3,7 +3,8 @@ import Image from "next/image";
 
 import { Icons } from "@/components/icons";
 
-export default function Home() {
+export default function Home()
+{
   return (
     <div className="bg-[#EDF4E3]">
       <Hero />
@@ -125,7 +126,8 @@ const openSourceReasons = [
       "আমরা যখন কোনো পদক্ষেপ নেব, তা হবে নিউক্লিয়ার চেইন রিঅ্যাকশনের মতো,একটি ছোট পদক্ষেপ থেকে শুরু করে ক্রমাগত প্রতিফলিত হয়ে শক্তি ও প্রভাবের বিস্ফোরণ ঘটাবে।",
   },
 ];
-function Hero() {
+function Hero()
+{
   return (
     <main className=" relative md:pb-[300px] ">
       <div className="relative  min-h-screen flex flex-col justify-center mx-auto px-4 py-12 text-center  gap-[25px] z-[2]">
@@ -217,7 +219,8 @@ function Hero() {
     </main>
   );
 }
-function SectionOne() {
+function SectionOne()
+{
   return (
     <section className=" min-h-screen bg-[#0A221F] py-[120px]">
       <div className=" flex flex-col gap-[30px] text-white p-6 md:p-12 max-w-4xl mx-auto">
@@ -258,12 +261,12 @@ function SectionOne() {
 
           <blockquote className="bg-[#434C39] p-6 rounded-lg max-w-[640px]">
             <p className="font-hind-siliguri font-light text-[24px] leading-[33.6px]  tracking-[0%] italic">
-              "ডিজিটাল মিডিয়া হাতে, আমরা উত্তর কোরিয়ার মতো একনায়কতন্ত্র করতে
+              &quot;ডিজিটাল মিডিয়া হাতে, আমরা উত্তর কোরিয়ার মতো একনায়কতন্ত্র করতে
               রেখে থাকবেন। ডিজিটাল মিডিয়ার ১,৫০০ লাইভ ব্লগ চ্যানেল রাখায়
               প্রয়োজন—তারা পরিবারের সাথে প্রতি থাকতে পারবে, কিন্তু তারা আত্ম
               করতে দেখে নিরাপত্তা। আদর্শ আর্য ডিজিটাল মিডিয়ার দ্বারা প্রেরিত
               হয়েছিল, এবং আমাদের এই একই ডিজিটাল শক্তিকে ব্যবহার করে আমাদের
-              দেশকে বিরাজিত করতে এবং এর দুর্নীতিগ্র রাজনীতিকে পরিষ্কার করতে হবে"
+              দেশকে বিরাজিত করতে এবং এর দুর্নীতিগ্র রাজনীতিকে পরিষ্কার করতে হবে&quot;
             </p>
           </blockquote>
 
@@ -285,7 +288,8 @@ function SectionOne() {
     </section>
   );
 }
-function ProfileGrid() {
+function ProfileGrid()
+{
   // Top row with different photos
   const topRowPhotos = Array(12).fill("/placeholder.svg");
 
@@ -350,7 +354,8 @@ function ProfileGrid() {
   );
 }
 
-function FeaturesSection() {
+function FeaturesSection()
+{
   return (
     <div className="bg-[#0A221F] px-4 py-12 md:py-16 lg:py-20">
       <div className="container mx-auto max-w-6xl flex flex-col justify-center items-center">
@@ -365,28 +370,26 @@ function FeaturesSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {openSourceReasons.map((item, index) => {
+          {openSourceReasons.map((item, index) =>
+          {
             return (
-              <>
-                {/* text-[#1D3200] */}
-                <div
-                  className="bg-[#EDF4E3] rounded-lg py-8 px-5 relative mb-[35px]"
-                  key={index}
-                >
-                  <div className="p-1 absolute -top-[32px] left-[50%] translate-x-[-50%] border border-[#9FE870]  rounded-[12px] bg-[#9FE870] flex items-center justify-center">
-                    {/* <Icons.digitalFirst className="w-10 h-10 " /> */}
-                    {item.icon}
-                  </div>
-                  <div className="flex flex-col items-center ">
-                    <h3 className="font-hind-siliguri font-semibold text-[24px] leading-[30px] mb-3 text-[#1D3200] text-center">
-                      {item.title}
-                    </h3>
-                    <p className="font-noto-sans font-normal text-[18px] leading-[24px] text-center text-[#1D3200]">
-                      {item.description}
-                    </p>
-                  </div>
+              <div
+                className="bg-[#EDF4E3] rounded-lg py-8 px-5 relative mb-[35px]"
+                key={index}
+              >
+                <div className="p-1 absolute -top-[32px] left-[50%] translate-x-[-50%] border border-[#9FE870]  rounded-[12px] bg-[#9FE870] flex items-center justify-center">
+                  {/* <Icons.digitalFirst className="w-10 h-10 " /> */}
+                  {item.icon}
                 </div>
-              </>
+                <div className="flex flex-col items-center ">
+                  <h3 className="font-hind-siliguri font-semibold text-[24px] leading-[30px] mb-3 text-[#1D3200] text-center">
+                    {item.title}
+                  </h3>
+                  <p className="font-noto-sans font-normal text-[18px] leading-[24px] text-center text-[#1D3200]">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
             );
           })}
         </div>
@@ -394,7 +397,8 @@ function FeaturesSection() {
     </div>
   );
 }
-function SectionTwo() {
+function SectionTwo()
+{
   return (
     <div className="min-h-screen bg-[#EDF4E3] p-6 md:p-12">
       <div className="mx-auto max-w-6xl">
@@ -412,7 +416,7 @@ function SectionTwo() {
               আমাদের ভিশন
             </h2>
             <p className="font-noto-sans font-medium text-[24px] leading-[36px] text-gray-700">
-              "বাংলাদেশ ২.০" আমাদের জন্য আগাম প্রজন্ম। এটি বৈরাচার সমাজ থেকে
+              &quot;বাংলাদেশ ২.০&quot; আমাদের জন্য আগাম প্রজন্ম। এটি বৈরাচার সমাজ থেকে
               মুক্তি এবং উন্নয়ন ভবিষ্যতের স্বপ্ন দেখার সাহস এনে দিয়েছিল। সাথিত
               এটি সময়ে টিকিয়ে রাখতে সক্ষম ছিল, কারই টিকনিক্যালের অভাব ছিলা
               তবুও এটি ডিজিটাল চিন্তা করার সাহস জুগিয়েছে এবং এখন স্বপ্ন দেখার
@@ -529,7 +533,8 @@ function SectionTwo() {
   );
 }
 
-function FeatureGrid() {
+function FeatureGrid()
+{
   return (
     <div className="min-h-screen ">
       {/* Decorative curves */}
@@ -558,7 +563,7 @@ function FeatureGrid() {
               <p className="font-hind-siliguri mb-2 font-medium text-[24px] leading-[30px] tracking-[0%]">
                 {feature.title}
               </p>
-              <p className="font-noto-sans font-normal text-[18px] leading-[24px] text-[16px] tracking-[0%]">
+              <p className="font-noto-sans font-normal text-[18px] leading-[24px] tracking-[0%]">
                 {feature.description}
               </p>
             </div>

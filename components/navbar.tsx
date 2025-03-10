@@ -21,7 +21,7 @@ export default function Navbar() {
         <nav className="hidden flex-col  md:flex md:flex-row md:items-center md:justify-between w-full h-full ">
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <Icons.logo className="h-16 w-16" />
-            <p>Lobon</p>
+            {/* <p>Lobon</p> */}
           </Link>
           <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
             {NAVIGATION.map((item) => (
