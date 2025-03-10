@@ -57,7 +57,7 @@ function Hero()
                 alt="Hero illustration showing people interacting with technology"
                 width={420}
                 height={730}
-                className="w-[420px] h-auto absolute top-0 right-0"
+                className="w-[300px] h-auto absolute top-0 right-0"
                 priority
             />
         </main>
