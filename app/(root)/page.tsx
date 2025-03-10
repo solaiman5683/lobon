@@ -129,93 +129,46 @@ const openSourceReasons = [
 function Hero()
 {
   return (
-    <main className=" relative md:pb-[300px] ">
-      <div className="relative  min-h-screen flex flex-col justify-center mx-auto px-4 py-12 text-center  gap-[25px] z-[2]">
+    <main className="">
+      <div className="container relative pt-[128px] flex flex-col justify-center mx-auto px-4 py-12 text-center gap-[25px] z-[2]">
         <div>
           <Button className=" hover:bg-[#1D3200] bg-[#1D3200] text-white font-hind-siliguri font-semibold text-[18.29px] leading-[18.29px] text-center">
             বাংলাদেশ 3.0
           </Button>
         </div>
 
-        <h1 className="text-[#1D3200] text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-4xl mx-auto leading-tight">
-          ওপেন-সোর্স পার্টি: <span className="text-[#FF3A69]">ক্ষমতা নয়</span>,
+        <h1 className="text-[rgb(29,50,0)] text-2xl md:text-4xl lg:text-5xl font-medium max-w-3xl mx-auto leading-tight">
+          ওপেন-সোর্স পার্টি: <span className="text-[#FF3A69] font-trb italic">ক্ষমতা নয়,</span>
           অবদানই নেতৃত্বের আসল মাপকাঠি
         </h1>
 
-        <p className="font-noto-sans font-medium text-[22px] leading-[33px] text-center max-w-2xl mx-auto  text-[#1D3200]">
-          আমরা একটি ওপেন-সোর্স ডিজিটাল প্ল্যাটফর্ম। গ্রামীণার্থ তৈরি করছি,
-          যেখানে জ্ঞান ও সুযোগের বিনিময় মাধ্যমে দেশের টিকটিকি হবে। এখানে সেটাই
-          হবে ব্যবহার মাধ্যমে আপনার অভিজ্ঞতা, সমস্যা সমাধান, এবং কমিউনিটির জন্য
-          অবদানই হবে নেতৃত্বের একমাত্র মাপকাঠি
+        <p className="font-noto-sans font-medium text-[22px] leading-[33px] text-center max-w-3xl mx-auto text-[#1D3200]">
+          আমরা একটি ওপেন-সোর্স ভিত্তিক স্মার্ট রাজনৈতিক ডিজিটাল প্ল্যাটফর্ম তৈরি করছি, যেখানে স্বচ্ছতা এবং সুশৃঙ্খল ব্যবস্থার মাধ্যমে নেতৃত্ব নির্ধারিত হবে। এখানে ক্রেডিট স্কোর ব্যবস্থার মাধ্যমে আপনার আইডিয়া, সমস্যা সমাধান এবং কমিউনিটির জন্য অবদানই হবে নেতৃত্বের একমাত্র মানদণ্ড। টাকা বা প্রভাব নয়, আপনার কাজই আপনাকে এগিয়ে নিয়ে যাবে। এই প্ল্যাটফর্ম সম্পূর্ণ অটোমেটিক এবং ট্রান্সপারেন্ট, যা দুর্নীতির কোনো সুযোগ রাখে না। সব সিদ্ধান্ত এবং প্রক্রিয়া ওপেন ও যাচাইযোগ্য।
         </p>
 
-        <div>
+        <div className="mb-8">
           <Button className="text-[#000000] hover:bg-[#86CD58] bg-[#86CD58] px-5 py-3 rounded-full font-hind-siliguri font-semibold text-[18px] leading-[24px]">
             জয়েন করুন
           </Button>
         </div>
 
-        {/* Download buttons */}
-        <div className="flex flex-wrap justify-center gap-4">
-          <Image
-            src="/icons/Mobile app store badge google-play.svg"
-            alt="Download on App Store"
-            width={135}
-            height={40}
-            className="h-12 w-[152px]   "
-          />
-          <Image
-            src="/icons/Mobile app store badge linux.svg"
-            alt="Download on App Store"
-            width={135}
-            height={40}
-            className="h-12 w-[152px]   "
-          />
-          <Image
-            src="/icons/Mobile app store badge apple.svg"
-            alt="Download on App Store"
-            width={135}
-            height={40}
-            className="h-12 w-[152px]   "
-          />
-          <Image
-            src="/icons/Mobile app store badge windows.svg"
-            alt="Download on App Store"
-            width={135}
-            height={40}
-            className="h-12 w-[152px]   "
-          />
-          <Image
-            src="/icons/Mobile app store badge macos.svg"
-            alt="Download on App Store"
-            width={135}
-            height={40}
-            className="h-12 w-[152px]   "
-          />
-        </div>
-
-        {/* Hero illustration */}
-        <div className="relative w-full max-w-5xl mx-auto">
-          {/* <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-mfA7ftgJvOrAllZcg28a4zcujj2HZN.png"
-            alt="Hero illustration showing people interacting with technology"
-            width={1200}
-            height={600}
-            className="w-full h-auto"
-            priority
-            /> */}
-        </div>
-      </div>
-      <div className=" w-full z-0 absolute bottom-0">
         <Image
-          src="/backgrounds/hero-bottom-bg.svg"
-          alt="Hero illustration showing people interacting with technology"
-          width={3000}
-          height={600}
+          src="/images/homepage.png"
+          alt=""
+          width={1920}
+          height={300}
           className="w-full h-auto"
           priority
         />
       </div>
+      <Image
+        src="/backgrounds/hero-bottom-bg.svg"
+        alt="Hero illustration showing people interacting with technology"
+        width={1920}
+        height={300}
+        className="w-full h-auto"
+        priority
+      />
     </main>
   );
 }
