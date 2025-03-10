@@ -1,7 +1,7 @@
 
 
 /** @type {import('next').NextConfig} */
-export default {
+const nextConfig = {
   // othor next config here...
   images: {
     remotePatterns: [
@@ -18,3 +18,5 @@ export default {
     ignoreBuildErrors: true,
   },
 };
+
+export default nextConfig;
