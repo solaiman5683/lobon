@@ -4,8 +4,8 @@ import Image from "next/image";
 function Hero()
 {
     return (
-        <main className="">
-            <div className="container relative pt-[128px] flex flex-col justify-center mx-auto px-4 py-12 text-center gap-[25px] z-[2]">
+        <main className="relative">
+            <div className="container relative pt-[128px] flex flex-col justify-center mx-auto py-12 text-center gap-[25px] z-[2]">
                 <div>
                     <Button className=" hover:bg-[#1D3200] bg-[#1D3200] text-white font-hind-siliguri font-semibold text-[18.29px] leading-[18.29px] text-center">
                         বাংলাদেশ 3.0
@@ -42,6 +42,22 @@ function Hero()
                 width={1920}
                 height={300}
                 className="w-full h-auto"
+                priority
+            />
+            <Image
+                src="/images/line-1.svg"
+                alt="Hero illustration showing people interacting with technology"
+                width={500}
+                height={600}
+                className="w-[500px] h-auto absolute top-0 left-0"
+                priority
+            />
+            <Image
+                src="/images/line-2.svg"
+                alt="Hero illustration showing people interacting with technology"
+                width={420}
+                height={730}
+                className="w-[420px] h-auto absolute top-0 right-0"
                 priority
             />
         </main>

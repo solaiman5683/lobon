@@ -16,9 +16,9 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed top-0 w-screen bg-[#EDF4E3] z-50">
-      <header className="flex py-4 items-center gap-4  mx-auto w-full max-w-screen-xl ">
-        <nav className="hidden flex-col  md:flex md:flex-row md:items-center md:justify-between w-full h-full ">
+    <div className="fixed top-0 w-screen z-50">
+      <header className="container flex py-4 items-center gap-4">
+        <nav className="hidden flex-col md:flex md:flex-row md:items-center md:justify-between w-full h-full ">
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <Icons.logo className="h-16 w-16" />
             {/* <p>Lobon</p> */}
