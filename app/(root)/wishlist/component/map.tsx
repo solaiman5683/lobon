@@ -43,11 +43,13 @@ export default function Map()
         <>
             <MapContainer
                 center={[23.6943, 90.3444]}
-                zoom={7}
+                zoom={7.4}
+                zoomSnap={0.1}
+                zoomDelta={0.1}
                 maxBounds={[[20.5906, 88.0086], [26.6345, 92.6803]]}
                 minZoom={6}
                 maxZoom={10}
-                style={{ height: '700px', width: '60%', background: '#e5f5e0' }}
+                style={{ height: '800px', width: '60%', background: '#e5f5e0' }}
             >
                 {/* TileLayer with reduced opacity and black-and-white filter via CSS */}
                 <TileLayer
@@ -88,6 +90,9 @@ export default function Map()
                         key={index}
                         position={[location.lat, location.lon]}
                         icon={createCustomIcon(location.count)} // Custom label
+                        eventHandlers={{
+                            click: () => console.log(`Total users: ${location.count}`)
+                        }}
                         zIndexOffset={1000} // Ensure labels are above GeoJSON
                     />
                 ))}
