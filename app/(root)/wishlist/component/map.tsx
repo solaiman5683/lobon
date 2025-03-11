@@ -47,7 +47,7 @@ export default function Map()
                 maxBounds={[[20.5906, 88.0086], [26.6345, 92.6803]]}
                 minZoom={6}
                 maxZoom={10}
-                style={{ height: '700px', width: '100%', background: '#e5f5e0' }}
+                style={{ height: '700px', width: '60%', background: '#e5f5e0' }}
             >
                 {/* TileLayer with reduced opacity and black-and-white filter via CSS */}
                 <TileLayer

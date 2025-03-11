@@ -1,5 +1,6 @@
 'use client';
 import dynamic from "next/dynamic";
+import JoinForm from "./component/join-form";
 
 const Map = dynamic(() => import("./component/map"), { ssr: false });
 
@@ -19,6 +20,7 @@ export default function PlatformPage()
                     <Map />
                 </div>
             </div>
+            <JoinForm />
         </div>
     )
 }
