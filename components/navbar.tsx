@@ -1,28 +1,68 @@
 "use client";
 
-import Link from "next/link";
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
-import { Button } from "./ui/button";
-import { Menu, Square } from "lucide-react";
-import { ModeToggle } from "./mode-toggle";
-import { usePathname } from "next/navigation";
 import { NAVIGATION } from "@/config";
 import { cn } from "@/lib/utils";
-import { ContactForm } from "./contact-form";
-import { MyCommandDialog } from "./my-command-dialog";
+import { Menu } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Icons } from "./icons";
+import { Button } from "./ui/button";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { useState } from "react";
 
 export default function Navbar()
 {
   const pathname = usePathname();
+  const { scrollY } = useScroll();
+  const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle scroll direction and position
+  useMotionValueEvent(scrollY, "change", (latest) =>
+  {
+    const previous = scrollY.getPrevious() ?? 0;
+    if (latest > previous && latest > 50) {
+      setIsVisible(false);
+    } else {
+      setIsVisible(true);
+    }
+    setIsScrolled(latest > 100);
+  });
+
+  const variants = {
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    },
+    hidden: {
+      y: -100,
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    },
+  };
 
   return (
-    <div className="fixed top-0 w-screen z-50">
-      <header className="container flex py-4 items-center gap-4">
-        <nav className="hidden flex-col md:flex md:flex-row md:items-center md:justify-between w-full h-full ">
+    <motion.div
+      className={cn(
+        "fixed top-0 transition-all w-screen z-[999999] duration-300",
+        isScrolled ? "top-2" : "bg-transparent"
+      )}
+      variants={variants}
+      initial="visible"
+      animate={isVisible ? "visible" : "hidden"}
+    >
+      <header className={cn("container flex py-4 items-center gap-4", isScrolled ? "bg-[#EDF4E3] shadow rounded-full border-dashed" : "bg-transparent")}>
+        <nav className="hidden flex-col md:flex md:flex-row md:items-center md:justify-between w-full h-full">
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <Icons.logo className="h-16 w-16" />
-            {/* <p>Lobon</p> */}
           </Link>
           <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
             {NAVIGATION.map((item) => (
@@ -31,9 +71,6 @@ export default function Navbar()
                 href={item.href}
                 className={cn(
                   "text-[#1D3200] text-[18px] font-semibold"
-                  // pathname === item.href
-                  //   ? "text-foreground"
-                  //   : "text-muted-foreground"
                 )}
               >
                 {item.title}
@@ -41,17 +78,13 @@ export default function Navbar()
             ))}
           </div>
           <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
-            {/* <ContactForm>
-            <p
-              role="button"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Contact
-            </p>
-          </ContactForm> */}
             <div className="flex gap-1">
-              <Link href='/wishlist'>
-                <Button className=" bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear hover:scale-110">Wishlist</Button>
+              <Link href="/wishlist">
+                <Button
+                  className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear hover:scale-110"
+                >
+                  Wishlist
+                </Button>
               </Link>
             </div>
           </div>
@@ -62,13 +95,9 @@ export default function Navbar()
               href="#"
               className="flex items-center gap-2 font-semibold w-fit"
             >
-              {/* <Square className="size-5 fill-foreground" /> */}
               <Icons.logo className="h-12 w-12" />
-              {/* <p>Lobon</p> */}
             </Link>
             <div>
-              {/* <ModeToggle />
-              <MyCommandDialog /> */}
               <SheetTrigger className="ml-2" asChild>
                 <Button
                   variant="outline"
@@ -82,7 +111,7 @@ export default function Navbar()
             </div>
           </div>
           <SheetContent side="right" className="bg-[#EDF4E3]">
-            <nav className="grid gap-6 text-lg font-medium  bg-[#EDF4E3]">
+            <nav className="grid gap-6 text-lg font-medium bg-[#EDF4E3]">
               {NAVIGATION.map((item) => (
                 <SheetClose asChild key={item.href}>
                   <Link
@@ -98,18 +127,10 @@ export default function Navbar()
                   </Link>
                 </SheetClose>
               ))}
-              {/* <ContactForm>
-                <p
-                  role="button"
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  Contact
-                </p>
-              </ContactForm> */}
             </nav>
           </SheetContent>
         </Sheet>
       </header>
-    </div>
+    </motion.div>
   );
 }
