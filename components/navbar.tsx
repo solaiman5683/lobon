@@ -12,7 +12,8 @@ import { ContactForm } from "./contact-form";
 import { MyCommandDialog } from "./my-command-dialog";
 import { Icons } from "./icons";
 
-export default function Navbar() {
+export default function Navbar()
+{
   const pathname = usePathname();
 
   return (
@@ -49,12 +50,9 @@ export default function Navbar() {
             </p>
           </ContactForm> */}
             <div className="flex gap-1">
-              {/* <ModeToggle />
-              <MyCommandDialog /> */}
-              <Button variant="ghost" className="text-[#1D3200]">
-                Sign up
-              </Button>
-              <Button className=" bg-[#1D3200] text-[#C8FF7D]">Login</Button>
+              <Link href='/wishlist'>
+                <Button className=" bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear hover:scale-110">Wishlist</Button>
+              </Link>
             </div>
           </div>
         </nav>

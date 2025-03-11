@@ -23,6 +23,7 @@
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.0",
         "cmdk": "^1.0.0",
+        "leaflet": "^1.9.4",
         "lucide-react": "^0.363.0",
         "next": "15.1.3",
         "next-themes": "^0.3.0",
@@ -30,6 +31,7 @@
         "react": "19.0.0",
         "react-dom": "19.0.0",
         "react-hook-form": "^7.51.2",
+        "react-leaflet": "5.0.0-rc.2",
         "sonner": "^1.4.41",
         "swr": "^2.2.5",
         "tailwind-merge": "^2.2.2",
@@ -38,6 +40,8 @@
         "zod": "^3.22.4"
     },
     "devDependencies": {
+        "@types/geojson": "^7946.0.16",
+        "@types/leaflet": "^1.9.16",
         "@types/node": "^20",
         "@types/react": "19.0.2",
         "@types/react-dom": "19.0.2",
