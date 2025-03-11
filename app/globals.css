@@ -90,7 +90,7 @@
 }
 
 .leaflet-tile-pane {
-	opacity: 0.2;
+	opacity: 0.15;
 	filter: grayscale(100%);
 }
 
