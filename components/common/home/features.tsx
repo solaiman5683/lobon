@@ -48,7 +48,7 @@ const openSourceReasons = [
 export default function Features()
 {
     return (
-        <div className="bg-[#0A221F] px-4 py-12 md:py-16 lg:py-20">
+        <div className="bg-[#0A221F] px-4 py-14 lg:py-[170px]">
             <div className="container mx-auto max-w-6xl flex flex-col justify-center items-center">
                 <div className=" flex flex-col gap-5 max-w-[579px]">
                     <h2 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold text-white ">
@@ -68,15 +68,16 @@ export default function Features()
                                 className="bg-[#EDF4E3] rounded-lg py-8 px-5 relative mb-[35px]"
                                 key={index}
                             >
-                                <div className="p-1 absolute -top-[32px] left-[50%] translate-x-[-50%] border border-[#9FE870]  rounded-[12px] bg-[#9FE870] flex items-center justify-center">
+                                <div className="p-1 absolute -top-[32px] left-[50%] translate-x-[-50%] border border-[#9FE870]  rounded-[12px] bg-[#9FE870] flex items-center justify-center text-[#1a2e05]">
                                     {/* <Icons.digitalFirst className="w-10 h-10 " /> */}
                                     {item.icon}
                                 </div>
-                                <div className="flex flex-col items-center ">
-                                    <h3 className="font-hind-siliguri font-semibold text-[24px] leading-[30px] mb-3 text-[#1D3200] text-center">
+                                <div className="flex flex-col items-center mt-6">
+                                    <h4 className="text-center justify-start text-[#1D3200] text-2xl font-semibold leading-loose">
                                         {item.title}
-                                    </h3>
-                                    <p className="font-noto-sans font-normal text-[18px] leading-[24px] text-center text-[#1D3200]">
+                                    </h4>
+                                    
+                                    <p className="font-noto-sans font-normal text-base leading-[24px] text-center text-[#1D3200]">
                                         {item.description}
                                     </p>
                                 </div>
