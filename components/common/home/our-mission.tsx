@@ -70,7 +70,7 @@ export default function OurMission()
 {
     return (
         <div className="min-h-screen">
-            <div className="relative max-w-5xl mx-auto py-12">
+            <div className="relative max-w-5xl mx-auto pb-[150px]">
                 {/* Header */}
                 <h1 className="text-4xl font-bold text-center mb-12 text-[#1D3200]">
                     বাংলাদেশ ৩.০
@@ -138,6 +138,10 @@ export default function OurMission()
                         className="h-auto max-w-full"
                     />
                 </div>
+
+                <p className="w-[468.63px] mx-auto text-center justify-start text-lime-950 text-2xl font-medium font-noto-sans leading-9 mt-[60px]">
+                    এখানে, আমরা সামারি তুলে ধরেছি। আমাদের বিস্তারিত হোয়াইট পেপার আসছে শীঘ্রই।
+                </p>
             </div>
         </div>
     );
