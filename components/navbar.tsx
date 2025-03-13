@@ -2,14 +2,14 @@
 
 import { NAVIGATION } from "@/config";
 import { cn } from "@/lib/utils";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { Icons } from "./icons";
 import { Button } from "./ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { useState } from "react";
 
 export default function Navbar()
 {
@@ -53,13 +53,13 @@ export default function Navbar()
     <motion.div
       className={cn(
         "fixed top-0 transition-all w-screen z-[999999] duration-300",
-        isScrolled ? "top-2" : "bg-transparent"
+        isScrolled ? "bg-[#EDF4E3] shadow" : "bg-transparent"
       )}
       variants={variants}
       initial="visible"
       animate={isVisible ? "visible" : "hidden"}
     >
-      <header className={cn("container flex py-4 items-center gap-4", isScrolled ? "bg-[#EDF4E3] shadow rounded-full border-dashed" : "bg-transparent")}>
+      <header className={cn("container flex py-4 items-center gap-4")}>
         <nav className="hidden flex-col md:flex md:flex-row md:items-center md:justify-between w-full h-full">
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <Icons.logo className="h-16 w-16" />

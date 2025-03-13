@@ -5,7 +5,7 @@ const features = [
     {
         id: 1,
         icon: Icons.technologySolution,
-        title: "টেকনোলজি-  সমাধান",
+        title: "টেকনোলজি-ফার্স্ট সমাধান",
         description:
             "আধুনিক প্রযুক্তিকে অগ্রাধিকার দিয়ে উন্নয়ন এবং সমস্যার সমাধান নিশ্চিত করা।",
     },
@@ -17,10 +17,10 @@ const features = [
     },
     {
         id: 3,
-        icon: Icons.technologySolution,
+        icon: Icons.centralStrategy,
         title: "ডিজিটাল-কেন্দ্রিক স্ট্রাটেজি",
         description:
-            "অনলাইন ও অফলাইন কার্যক্রমের সমন্বয়ে একটি শক্তিশালী প্ল্যাটফর্ম তৈরি করা।    ",
+            "অনলাইন ও অফলাইন কার্যক্রমের সমন্বয়ে একটি শক্তিশালী প্ল্যাটফর্ম তৈরি করা।",
     },
     {
         id: 4,
@@ -69,8 +69,8 @@ const features = [
 export default function OurMission()
 {
     return (
-        <div className="min-h-screen ">
-            <div className="relative container mx-auto px-4 py-12">
+        <div className="min-h-screen">
+            <div className="relative max-w-5xl mx-auto py-12">
                 {/* Header */}
                 <h1 className="text-4xl font-bold text-center mb-12 text-[#1D3200]">
                     বাংলাদেশ ৩.০
@@ -83,7 +83,11 @@ export default function OurMission()
                             key={index}
                             className="bg-[#434C39] rounded-[16px] py-[30px] px-[24px] text-white shadow-lg"
                         >
-                            {<feature.icon className="w-12 h-12 text-[#C8FF7D] mb-[25px]" />}
+                            <div className="mb-[25px] flex">
+                                <span className="flex items-center justify-center bg-[#C8FF7D] p-1 rounded-xl">
+                                    {<feature.icon className="size-[40px] text-[#434C39]" />}
+                                </span>
+                            </div>
                             <p className="font-hind-siliguri mb-2 font-medium text-[24px] leading-[30px] tracking-[0%]">
                                 {feature.title}
                             </p>
@@ -107,11 +111,9 @@ export default function OurMission()
                         <h2 className="font-hind-siliguri font-semibold text-[#1D3200] text-[55px] leading-[60.5px] tracking-[-0.01em]">
                             আমাদের মিশন
                         </h2>
-                        <p className="font-noto-sans font-medium text-[24px] leading-[36px] text-gray-700">
-                            অনেক সময় আমরা ভিশন এবং মিশন নিয়ে বিভ্রান্ত হতে পারি। এখানে যা
-                            উল্লেখ করা হয়েছে, তা হলো ভিশন, যা আমাদের দীর্ঘমেয়াদী লক্ষ্য এবং
-                            সামগ্রিক দৃষ্টিভঙ্গি। মিশন হলো সেই নির্দিষ্ট উপায়, যার মাধ্যমে
-                            আমরা ধাপে ধাপে সেই লক্ষ্য অর্জন করতে পারি।
+                        <p className="max-w-[480px] text-[#1D3200] text-xl font-noto-sans leading-9">
+                            অনেক সময় আমরা ভিশন এবং মিশন নিয়ে বিভ্রান্ত হতে পারি। এখানে যা উল্লেখ করা হয়েছে, তা হলো ভিশন, যা আমাদের দীর্ঘমেয়াদী লক্ষ্য এবং সামগ্রিক দৃষ্টিভঙ্গি। <br />
+                            মিশন হলো সেই নির্দিষ্ট উপায়, যার মাধ্যমে আমরা ধাপে ধাপে সেই লক্ষ্য অর্জন করতে পারি।
                         </p>
                     </div>
                     <div className="flex items-center justify-center">

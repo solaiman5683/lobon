@@ -10,7 +10,7 @@ const openSourceReasons = [
     },
     {
         id: 2,
-        icon: <Icons.clearRoadmap className="w-10 h-10 " />,
+        icon: <Icons.centralStrategy className="w-10 h-10 " />,
         title: "স্বচ্ছ প্রক্রিয়া",
         description:
             "প্রতিটি সিদ্ধান্ত ও কার্যক্রম সবার জন্য উন্মুক্ত, যাতে গোপনীয়তা বা পক্ষপাতিত্বের কোনো জায়গা না থাকে। ",
@@ -48,8 +48,8 @@ const openSourceReasons = [
 export default function Features()
 {
     return (
-        <div className="bg-[#0A221F] px-4 py-14 lg:py-[170px]">
-            <div className="container mx-auto max-w-6xl flex flex-col justify-center items-center">
+        <div className="bg-[#0A221F] py-14 lg:py-[170px]">
+            <div className="mx-auto max-w-5xl flex flex-col justify-center items-center">
                 <div className=" flex flex-col gap-5 max-w-[579px]">
                     <h2 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold text-white ">
                         কেন এটিকে ওপেন-সোর্স বলা হচ্ছে?
