@@ -43,8 +43,8 @@ export default function OurGovernance()
           এই সিস্টেমের উপর ভিত্তি করে সাধারণ মেম্বাররা আমাদের ইন্টারনাল পার্টির হায়ারার্কি পজিশনগুলোতে নির্বাচনে অংশগ্রহণ করতে পারবে।
         </p>
 
-        <Button className="bg-[#86cd58] hover:bg-[#88d157] text-black text-lg font-semibold leading-normal rounded-full px-8">
-          জয়েন করুন
+        <Button className="bg-[#86cd58] hover:bg-[#88d157] text-black text-lg font-semibold leading-normal rounded-full px-8 py-3 h-auto">
+          বিস্তারিত জানুন
         </Button>
       </div>
     </div>
