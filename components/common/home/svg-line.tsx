@@ -31,7 +31,7 @@ const SVGLineView = ({ className }: {
                     hidden: { pathLength: 0, opacity: 0 },
                     visible: { pathLength: 1, opacity: 1 },
                 }}
-                transition={{ duration: 2, ease: "easeInOut" }} // 2-second smooth animation
+                transition={{ duration: 1, ease: "easeInOut" }} // 2-second smooth animation
             />
         </motion.svg>
     );

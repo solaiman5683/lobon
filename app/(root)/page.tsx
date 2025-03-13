@@ -1,6 +1,7 @@
 
 import Features from "@/components/common/home/features";
 import Hero from "@/components/common/home/hero";
+import OurGovernance from "@/components/common/home/our-governance";
 import OurMission from "@/components/common/home/our-mission";
 import OurVision from "@/components/common/home/our-vision";
 import TeamGrid from "@/components/common/home/team-grid";
@@ -16,6 +17,7 @@ export default function Home()
       <Features />
       <OurVision />
       <OurMission />
+      <OurGovernance />
     </div>
   );
 }
