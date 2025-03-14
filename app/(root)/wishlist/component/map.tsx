@@ -27,6 +27,7 @@ const createCustomIcon = (count: number) =>
 
 export default function Map()
 {
+    const isMobile = window.innerWidth < 768;
     // Example user locations
     const userLocations = [
         { lat: 23.8103, lon: 90.2125, count: 250 }, // Dhaka
@@ -43,13 +44,13 @@ export default function Map()
         <>
             <MapContainer
                 center={[23.6943, 90.3444]}
-                zoom={7.4}
+                zoom={isMobile ? 6.5 : 7.4}
                 zoomSnap={0.1}
                 zoomDelta={0.1}
                 maxBounds={[[20.5906, 88.0086], [26.6345, 92.6803]]}
                 minZoom={6}
                 maxZoom={10}
-                style={{ height: '800px', width: '60%', background: '#e5f5e0' }}
+                style={{ height: isMobile ? '450px' : '800px', width: isMobile ? '100%' : '60%', background: '#e5f5e0' }}
             >
                 {/* TileLayer with reduced opacity and black-and-white filter via CSS */}
                 <TileLayer
