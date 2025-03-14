@@ -1,6 +1,8 @@
 'use client';
 import dynamic from "next/dynamic";
 import JoinForm from "./component/join-form";
+import Link from "next/link";
+import Image from "next/image";
 
 const Map = dynamic(() => import("./component/map"), { ssr: false });
 
@@ -21,6 +23,44 @@ export default function PlatformPage()
                 </div>
             </div>
             <JoinForm />
+
+            <div className="flex justify-center items-center lg:py-32 py-12 px-4 lg:px-0">
+                <div className="max-w-[863px] lg:p-20 px-6 py-10 bg-[#434C39] rounded-lg space-y-5">
+                    <h4 className="text-center text-white lg:text-5xl text-3xl font-medium lg:leading-[55px]">
+                        আমাদের কমিনিউট জয়েন করুন
+                    </h4>
+
+                    <div className="space-y-[30px] lg:pr-8">
+                        <div className="flex flex-col items-center">
+                            <h4 className="text-white text-xl font-semibold leading-normal">জয়েন  করুন</h4>
+
+                            <div className="flex items-center gap-5 mt-3">
+                                <Link href='/'>
+                                    <Image src="/icons/fb-group.svg" width={44} height={44} alt="Facebook" />
+                                </Link>
+                                <Link href='/'>
+                                    <Image src="/icons/discord.svg" width={44} height={44} alt="discord" />
+                                </Link>
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-center">
+                            <h4 className="text-white text-xl font-semibold leading-normal">ফলো করুন</h4>
+
+                            <div className="flex items-center gap-5 mt-3">
+                                <Link href='/'>
+                                    <Image src="/icons/facebook.svg" width={44} height={44} alt="Facebook" />
+                                </Link>
+                                <Link href='/'>
+                                    <Image src="/icons/twitter-light.svg" width={44} height={44} alt="twitter" />
+                                </Link>
+                                <Link href='/'>
+                                    <Image src="/icons/linkedin.svg" width={44} height={44} alt="linkedin" />
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
