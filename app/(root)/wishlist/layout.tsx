@@ -1,6 +1,3 @@
-import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
-import { Toaster } from "@/components/ui/sonner";
 import 'leaflet/dist/leaflet.css';
 
 const Layout = ({
@@ -11,10 +8,7 @@ const Layout = ({
 {
     return (
         <>
-            <Navbar />
             {children}
-            <Toaster position="bottom-right" />
-            <Footer />
         </>
     );
 };
