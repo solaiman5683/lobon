@@ -7,10 +7,10 @@ import { Icons } from "./icons";
 
 export default function Footer()
 {
-  const getYear = () =>
-  {
-    return new Date().getFullYear();
-  };
+  // const getYear = () =>
+  // {
+  //   return new Date().getFullYear();
+  // };
   return (
     <footer className="bg-[#1a2e05] lg:pt-32 pt-12">
       <div className="container lg:pb-20 pb-8">

@@ -1,58 +1,144 @@
 'use client';
 
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import PhoneInput from "./phoneInput";
 
 const occupations = [
     {
-        slug: 'engineer',
+        slug: 'Engineer',
         name: 'ইঞ্জিনিয়ার',
     },
     {
-        slug: 'scientist',
+        slug: 'Scientist ',
         name: 'সাইনন্টিস্ট',
     },
     {
-        slug: 'entrepreneur',
+        slug: 'Entrepreneur ',
         name: 'এন্টারপ্রেনার',
     },
     {
-        slug: 'others',
+        slug: 'Other',
         name: 'অন্য পেশা',
     }
 ]
 
 const activityTypes = [
     {
-        slug: 'publicly',
+        slug: 'Publicly',
         name: 'পাবলিকলি',
     },
     {
-        slug: 'secretly',
+        slug: 'Secretly',
         name: 'সিক্রেটলি',
     }
 ]
 
+
+// Function to post data to NocoDB table
+async function postToNocoDB(inputData: any)
+{
+
+    const options = {
+        method: "POST",
+        url: "https://crm.lobon.org/api/v2/tables/mezkublc4xdsf3h/records",
+        headers: {
+            "xc-token": "rLTPoRJbaJCawC-KdapuQj42liIhINFJLC5BgFVT",
+            "Content-Type": "application/json"
+        },
+        data: inputData
+    };
+
+    try {
+        const response = await axios.request(options);
+        console.log("Record created successfully:", response.data);
+        return response.data;
+    } catch (error: any) {
+        console.error(
+            "Error posting to NocoDB:",
+            error.response ? error.response.data : error.message
+        );
+        throw error;
+    }
+}
+
+async function getFromNocoDB()
+{
+    const options = {
+        method: "GET",
+        url: "https://crm.lobon.org/api/v2/tables/mezkublc4xdsf3h/records",
+        headers: {
+            "xc-token": "rLTPoRJbaJCawC-KdapuQj42liIhINFJLC5BgFVT",
+            "Content-Type": "application/json"
+        }
+    };
+
+    try {
+        const response = await axios.request(options);
+        console.log("Records fetched successfully:", response.data);
+        return response.data; // Return the fetched records
+    } catch (error: any) {
+        console.error(
+            "Error fetching from NocoDB:",
+            error?.response ? error?.response?.data : error?.message
+        );
+        throw error; // Throw error for handling by the caller
+    }
+}
+
 export default function JoinForm()
 {
     const [formValues, setFormValues] = useState({
-        name: '',
-        activity: activityTypes[0].slug,
-        phone: '',
-        email: '',
-        district: '',
-        occupation: occupations[0].slug,
-        url: '',
-        contributionMessage: '',
+        Name: '',
+        Activity: activityTypes[0].slug,
+        Phone: '',
+        Email: '',
+        District: '',
+        Occupassion: occupations[0].slug,
+        About: '',
+        Contribution: '',
     });
 
     const handleSubmit = (e: any) =>
     {
         e.preventDefault();
         console.log(formValues);
+        // check if all fields are filled
+        const isFormValid = Object.values(formValues).every((value) => value !== '');
+        if (!isFormValid) {
+            toast.error('অনুগ্রহ করে সব ফিল্ড পূরণ করুন');
+            return;
+        }
+        // send form data to server
+        try {
+            postToNocoDB(formValues);
+            toast.success('আপনার তথ্য সফলভাবে সাবমিট করা হয়েছে');
+
+            // Reset form values
+            setFormValues({
+                Name: '',
+                Activity: activityTypes[0].slug,
+                Phone: '',
+                Email: '',
+                District: '',
+                Occupassion: occupations[0].slug,
+                About: '',
+                Contribution: '',
+            });
+        } catch (error) {
+            console.log(error, 'hello');
+            toast.error('কিছু একটা সমস্যা হয়েছে, দয়া করে আবার চেষ্টা করুন');
+        }
     };
 
+    useEffect(() =>
+    {
+        getFromNocoDB();
+    }, []);
+
     return (
-        <div className="bg-[#0A221F] lg:py-32 py-8 ">
+        <div className="bg-[#0A221F] lg:py-32 py-8 px-4 lg:px-0">
             <div className="max-w-2xl mx-auto space-y-6">
                 <h4 className="text-white text-[50px] font-medium leading-[55px]">জয়েনফর্ম</h4>
                 <div className="italic text-white/90 text-[22px] font-normal font-trb leading-[33px]">নোটঃ আপনি যদি BAL , সমকামী আইডলজি সমর্থক হয়ে থাকেন, <br /> দয়া করে সাবমিশন থেকে বিরত থাকুন।</div>
@@ -65,8 +151,8 @@ export default function JoinForm()
                             name="name"
                             id="name"
                             required
-                            onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
-                            value={formValues.name}
+                            onChange={(e) => setFormValues({ ...formValues, Name: e.target.value })}
+                            value={formValues.Name}
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
                     </div>
                     <div className="space-y-2">
@@ -74,9 +160,9 @@ export default function JoinForm()
                         <div className="flex gap-8">
                             {
                                 activityTypes.map((activity) => (
-                                    <div key={activity.slug} onClick={() => setFormValues({ ...formValues, activity: activity.slug })} className={`flex items-center space-x-2 cursor-pointer ${formValues.activity === activity.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
+                                    <div key={activity.slug} onClick={() => setFormValues({ ...formValues, Activity: activity.slug })} className={`flex items-center space-x-2 cursor-pointer ${formValues.Activity === activity.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
                                         <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
-                                            <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.activity === activity.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
+                                            <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.Activity === activity.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
                                         </div>
                                         <span className="justify-start text-base font-semibold leading-normal">{activity.name}</span>
                                     </div>
@@ -85,18 +171,7 @@ export default function JoinForm()
 
                         </div>
                     </div>
-                    <div className="space-y-2">
-                        <label htmlFor="phone" className="text-[22px] font-medium leading-[33px]">
-                            আপনার ফোন নাম্বার?
-                        </label>
-                        <input
-                            type="number"
-                            name="phone"
-                            id="phone"
-                            onChange={(e) => setFormValues({ ...formValues, phone: e.target.value })}
-                            value={formValues.phone}
-                            className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
-                    </div>
+                    <PhoneInput formValues={formValues} setFormValues={setFormValues} />
                     <div className="space-y-2">
                         <label htmlFor="email" className="text-[22px] font-medium leading-[33px]">
                             আপনার ইমেইল?
@@ -106,8 +181,8 @@ export default function JoinForm()
                             name="email"
                             id="email"
                             required
-                            onChange={(e) => setFormValues({ ...formValues, email: e.target.value })}
-                            value={formValues.email}
+                            onChange={(e) => setFormValues({ ...formValues, Email: e.target.value })}
+                            value={formValues.Email}
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
                     </div>
                     <div className="space-y-2">
@@ -119,23 +194,23 @@ export default function JoinForm()
                             name="district"
                             id="district"
                             required
-                            onChange={(e) => setFormValues({ ...formValues, district: e.target.value })}
-                            value={formValues.district}
+                            onChange={(e) => setFormValues({ ...formValues, District: e.target.value })}
+                            value={formValues.District}
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
                     </div>
                     <div className="space-y-2">
                         <label className="text-[22px] font-medium leading-[33px]">
                             আপনার পেশা?
                         </label>
-                        <div className="flex gap-8">
+                        <div className="flex flex-wrap gap-8">
                             {
                                 occupations.map((occupation) => (
                                     <div
                                         key={occupation.slug}
-                                        onClick={() => setFormValues({ ...formValues, occupation: occupation.slug })}
-                                        className={`flex items-center space-x-2 cursor-pointer ${formValues.occupation === occupation.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
+                                        onClick={() => setFormValues({ ...formValues, Occupassion: occupation.slug })}
+                                        className={`flex items-center space-x-2 cursor-pointer ${formValues.Occupassion === occupation.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
                                         <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
-                                            <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.occupation === occupation.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
+                                            <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.Occupassion === occupation.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
                                         </div>
                                         <span className="justify-start text-base font-semibold leading-normal">{occupation.name}</span>
                                     </div>
@@ -153,8 +228,8 @@ export default function JoinForm()
                             name="url"
                             id="url"
                             required
-                            onChange={(e) => setFormValues({ ...formValues, url: e.target.value })}
-                            value={formValues.url}
+                            onChange={(e) => setFormValues({ ...formValues, About: e.target.value })}
+                            value={formValues.About}
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
                     </div>
                     <div className="space-y-2">
@@ -165,8 +240,8 @@ export default function JoinForm()
                             name="contributionMessage"
                             id="contributionMessage"
                             required
-                            onChange={(e) => setFormValues({ ...formValues, contributionMessage: e.target.value })}
-                            value={formValues.contributionMessage}
+                            onChange={(e) => setFormValues({ ...formValues, Contribution: e.target.value })}
+                            value={formValues.Contribution}
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
                     </div>
 
