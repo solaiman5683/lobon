@@ -5,8 +5,8 @@ import SVGLineView from './svg-line'
 export default function OurVision()
 {
   return (
-    <div className="bg-[#EDF4E3] py-32">
-      <div className="mx-auto max-w-5xl">
+    <div className="bg-[#EDF4E3] lg:py-32 py-12">
+      <div className="mx-auto max-w-5xl  px-4 lg:px-0">
         {/* Logo and Vision Section */}
         <div className="mb-12 grid gap-8 md:grid-cols-2 md:gap-12">
           <div className="space-y-6">
@@ -101,7 +101,7 @@ export default function OurVision()
           </div>
         </div>
       </div>
-      <SVGLineView className="w-full h-auto -mt-20 -mb-72" />
+      <SVGLineView className="w-full h-auto lg:-mt-20 lg:-mb-72 -mb-20" />
     </div>
   )
 }

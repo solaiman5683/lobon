@@ -7,13 +7,13 @@ export default function TeamGrid()
     const topRowPhotos = Array(84).fill("");
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-[120px] space-y-6">
+        <div className="max-w-7xl mx-auto px-4 lg:py-32 py-12 space-y-6">
             {/* Bengali Title */}
-            <h2 className="max-w-[531px] mx-auto text-center text-[#1d3200] text-[50px] font-medium leading-[55px]">আমরা সবাই রাজা আমাদের এই রাজার রাজত্বে</h2>
+            <h2 className="max-w-[531px] mx-auto text-center text-[#1d3200] lg:text-[50px] text-3xl font-medium lg:leading-[55px]">আমরা সবাই রাজা আমাদের এই রাজার রাজত্বে</h2>
 
             <div className="relative">
                 {/* Top row with different photos */}
-                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-12 gap-2 mb-4">
+                <div className="grid grid-cols-6 md:grid-cols-12 gap-2 mb-4">
                     {topRowPhotos.map((_, index) => (
                         <div key={`top-${index}`} className="aspect-square relative">
                             <Image

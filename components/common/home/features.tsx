@@ -48,7 +48,7 @@ const openSourceReasons = [
 export default function Features()
 {
     return (
-        <div className="bg-[#0A221F] py-14 lg:py-[170px]">
+        <div className="bg-[#0A221F] py-12 lg:py-32 px-4 lg:px-0">
             <div className="mx-auto max-w-5xl flex flex-col justify-center items-center">
                 <div className=" flex flex-col gap-5 max-w-[579px]">
                     <h2 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold text-white ">
@@ -60,7 +60,7 @@ export default function Features()
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-6 gap-4">
                     {openSourceReasons.map((item, index) =>
                     {
                         return (

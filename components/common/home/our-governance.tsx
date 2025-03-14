@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function OurGovernance()
 {
   return (
-    <div className='bg-[#fce7f3] py-36'>
-      <div className="max-w-5xl mx-auto">
+    <div className='bg-[#fce7f3] lg:py-32 py-12'>
+      <div className="max-w-5xl px-4 lg:px-0 mx-auto">
         <h4 className="text-black text-5xl font-medium leading-[55px] mb-5">
           আমাদের গভার্নেন্স
         </h4>
@@ -13,9 +13,9 @@ export default function OurGovernance()
           আমাদের গভর্নেন্স সিস্টেম ক্রেডিট সিস্টেমের উপর ভিত্তি করে ডিজাইন করা হবে, যেখানে ক্রেডিট নাম্বার সদস্যদের মধ্যে ডায়নামিকভাবে তাদের অবদানের ভিত্তিতে বিতরণ করা হবে।
         </p>
 
-        <div className="flex gap-10 my-[50px]">
-          <div className="min-w-max w-[600px]">
-            <Image src="/images/governance-logo.svg" width={600} height={880} alt="Our Governance" className="h-auto" />
+        <div className="flex lg:flex-row flex-col-reverse gap-10 my-[50px]">
+          <div className="lg:w-[600px]">
+            <Image src="/images/governance-logo.svg" width={600} height={880} alt="Our Governance" className="w-full h-auto" />
           </div>
 
           <div className="flex-1 flex flex-col justify-between space-y-3">

@@ -12,14 +12,14 @@ export default function Footer()
     return new Date().getFullYear();
   };
   return (
-    <footer className="bg-[#1a2e05] pt-32 ">
-      <div className="container pb-20">
-        <div className="flex justify-between bg-[#EDF4E3] rounded-[20px] p-8">
+    <footer className="bg-[#1a2e05] lg:pt-32 pt-12">
+      <div className="container lg:pb-20 pb-8">
+        <div className="flex lg:flex-row flex-col items-center justify-between bg-[#EDF4E3] rounded-[20px] gap-8 lg:p-8 p-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Icons.logo className="size-44" />
+            <Icons.logo className="w-44 h-auto" />
           </Link>
 
-          <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
+          <div className="flex-col gap-6 text-lg font-medium flex md:flex-row md:items-center justify-between text-center md:text-left md:text-sm lg:gap-6">
             {NAVIGATION.map((item) => (
               <Link
                 key={item.href}
@@ -33,9 +33,9 @@ export default function Footer()
             ))}
           </div>
 
-          <div className="space-y-[30px] pr-8">
+          <div className="space-y-[30px] lg:pr-8">
 
-            <div>
+            <div className="flex flex-col items-center">
               <h4 className="text-[#1D3200] text-xl font-semibold leading-normal">জয়েন  করুন</h4>
 
               <div className="flex items-center gap-5 mt-3">
@@ -47,7 +47,7 @@ export default function Footer()
                 </Link>
               </div>
             </div>
-            <div>
+            <div className="flex flex-col items-center">
               <h4 className="text-[#1D3200] text-xl font-semibold leading-normal">ফলো করুন</h4>
 
               <div className="flex items-center gap-5 mt-3">

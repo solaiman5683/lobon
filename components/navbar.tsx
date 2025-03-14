@@ -62,7 +62,7 @@ export default function Navbar()
       <header className={cn("container flex py-4 items-center gap-4")}>
         <nav className="hidden flex-col md:flex md:flex-row md:items-center md:justify-between w-full h-full">
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Icons.logo className="h-16 w-16" />
+            <Icons.logo className="h-auto w-16" />
           </Link>
           <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
             {NAVIGATION.map((item) => (
@@ -90,12 +90,12 @@ export default function Navbar()
           </div>
         </nav>
         <Sheet>
-          <div className="w-full flex md:hidden justify-between">
+          <div className="w-full flex md:hidden justify-between items-center">
             <Link
               href="#"
               className="flex items-center gap-2 font-semibold w-fit"
             >
-              <Icons.logo className="h-12 w-12" />
+              <Icons.logo className="h-auto w-10" />
             </Link>
             <div>
               <SheetTrigger className="ml-2" asChild>
@@ -110,7 +110,7 @@ export default function Navbar()
               </SheetTrigger>
             </div>
           </div>
-          <SheetContent side="right" className="bg-[#EDF4E3]">
+          <SheetContent side="right" className="bg-[#EDF4E3] z-[999999]">
             <nav className="grid gap-6 text-lg font-medium bg-[#EDF4E3]">
               {NAVIGATION.map((item) => (
                 <SheetClose asChild key={item.href}>

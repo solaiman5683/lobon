@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function OurPlatform()
 {
     return (
-        <div className="bg-[#0A221F] py-[150px]">
+        <div className="bg-[#0A221F] lg:py-32 py-12">
             <div className="container space-y-5">
                 <h3
                     className="self-stretch justify-start text-white text-5xl font-medium leading-[55px]">
