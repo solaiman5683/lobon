@@ -139,9 +139,9 @@ export default function JoinForm()
 
     return (
         <div className="bg-[#0A221F] lg:py-32 py-8 px-4 lg:px-0">
-            <div className="max-w-2xl mx-auto space-y-6">
-                <h4 className="text-white text-[50px] font-medium leading-[55px]">জয়েনফর্ম</h4>
-                <div className="italic text-white/90 text-[22px] font-normal font-trb leading-[33px]">নোটঃ আপনি যদি BAL , সমকামী আইডলজি সমর্থক হয়ে থাকেন, <br /> দয়া করে সাবমিশন থেকে বিরত থাকুন।</div>
+            <div className="max-w-2xl mx-auto lg:space-y-6 space-y-4">
+                <h4 className="text-white lg:text-[50px] text-3xl font-medium leading-[55px]">জয়েনফর্ম</h4>
+                <div className="italic text-white/90 lg:text-[22px] text-lg font-normal font-trb lg:leading-[33px]">নোটঃ আপনি যদি BAL , সমকামী আইডলজি সমর্থক হয়ে থাকেন, <br className="lg:block hidden" /> দয়া করে সাবমিশন থেকে বিরত থাকুন।</div>
 
                 <form onSubmit={handleSubmit} className="space-y-6 text-white">
                     <div className="space-y-2">

@@ -110,14 +110,14 @@ export default function Navbar()
               </SheetTrigger>
             </div>
           </div>
-          <SheetContent closeButtonClassName="text-[#EDF4E3] bg-black ring-0 focus:ring-0 p-1" side="right" className="bg-[#EDF4E3] py-14 z-[999999]">
+          <SheetContent closeButtonClassName="text-[#EDF4E3] bg-black ring-0 focus:ring-0 p-1" side="right" className="bg-[#EDF4E3] py-14 z-[999999] flex flex-col gap-8">
             <nav className="grid gap-6 text-lg font-medium bg-[#EDF4E3]">
               {NAVIGATION.map((item) => (
                 <SheetClose asChild key={item.href}>
                   <Link
                     href={item.href}
                     className={cn(
-                      "hover:text-foreground text-xl text-[#1D3200]",
+                      "hover:text-[#1D3200] text-xl text-[#1D3200]",
                       pathname === item.href
                         ? "text-[#1D3200]"
                         : "text-[#1d3200a8]"
@@ -128,6 +128,13 @@ export default function Navbar()
                 </SheetClose>
               ))}
             </nav>
+            <Link href="/wishlist" className="w-full">
+              <Button
+                className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear w-full"
+              >
+                Wishlist
+              </Button>
+            </Link>
           </SheetContent>
         </Sheet>
       </header>
