@@ -13,12 +13,12 @@ export default function OurGovernance()
           আমাদের গভর্নেন্স সিস্টেম ক্রেডিট সিস্টেমের উপর ভিত্তি করে ডিজাইন করা হবে, যেখানে ক্রেডিট নাম্বার সদস্যদের মধ্যে ডায়নামিকভাবে তাদের অবদানের ভিত্তিতে বিতরণ করা হবে।
         </p>
 
-        <div className="flex lg:flex-row flex-col-reverse gap-10 my-[50px]">
+        <div className="flex lg:flex-row flex-col gap-10 my-[50px]">
           <div className="lg:w-[600px]">
             <Image src="/images/governance-logo.svg" width={600} height={880} alt="Our Governance" className="w-full h-auto" />
           </div>
 
-          <div className="flex-1 flex flex-col justify-between space-y-3">
+          <div className="flex-1 flex flex-col justify-between space-y-3 w-[300px] md:w-full mx-auto">
             <div className="bg-[#434C39] rounded-xl p-8 flex flex-col items-center w-full">
               <Image src="/icons/election-credit.svg" width={48} height={48} alt="Our Governance" />
               <h4 className="text-center justify-start text-white text-2xl font-semibold leading-loose">Donate Credit</h4>
@@ -39,11 +39,11 @@ export default function OurGovernance()
           </div>
         </div>
 
-        <p className="max-w-[579px] justify-start text-neutral-900 text-xl font-medium font-noto-sans leading-loose mb-5">
+        <p className="max-w-[579px] justify-start text-neutral-900 lg:text-xl text-base font-medium font-noto-sans lg:leading-loose mb-5">
           এই সিস্টেমের উপর ভিত্তি করে সাধারণ মেম্বাররা আমাদের ইন্টারনাল পার্টির হায়ারার্কি পজিশনগুলোতে নির্বাচনে অংশগ্রহণ করতে পারবে।
         </p>
 
-        <Button className="bg-[#86cd58] hover:bg-[#88d157] text-black text-lg font-semibold leading-normal rounded-full px-8 py-3 h-auto">
+        <Button className="bg-[#86cd58] hover:bg-[#88d157] text-black lg:text-lg font-semibold leading-normal rounded-full px-8 py-3 h-auto">
           বিস্তারিত জানুন
         </Button>
       </div>

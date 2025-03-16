@@ -72,26 +72,26 @@ export default function OurMission()
         <div className="min-h-screen">
             <div className="relative max-w-5xl mx-auto px-4 lg:px-0 lg:pb-32 pb-12">
                 {/* Header */}
-                <h1 className="text-4xl font-bold text-center mb-12 text-[#1D3200]">
+                <h1 className="lg:text-5xl text-3xl font-bold text-center mb-12 text-[#1D3200]">
                     বাংলাদেশ ৩.০
                 </h1>
 
                 {/* Feature Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 w-[300px] md:w-full mx-auto">
                     {features.map((feature, index) => (
                         <div
                             key={index}
                             className="bg-[#434C39] rounded-[16px] py-[30px] px-[24px] text-white shadow-lg"
                         >
-                            <div className="mb-[25px] flex">
+                            <div className="lg:mb-[25px] mb-3 flex">
                                 <span className="flex items-center justify-center bg-[#C8FF7D] p-1 rounded-xl">
                                     {<feature.icon className="size-[40px] text-[#434C39]" />}
                                 </span>
                             </div>
-                            <p className="font-hind-siliguri mb-2 font-medium text-[24px] leading-[30px] tracking-[0%]">
+                            <p className="font-hind-siliguri lg:mb-2 font-medium lg:text-[24px] text-lg leading-[30px] tracking-[0%]">
                                 {feature.title}
                             </p>
-                            <p className="font-noto-sans font-normal text-[18px] leading-[24px] tracking-[0%]">
+                            <p className="font-noto-sans font-normal lg:text-[18px] text-xs lg:leading-[24px] tracking-[0%]">
                                 {feature.description}
                             </p>
                         </div>
@@ -100,24 +100,26 @@ export default function OurMission()
 
                 {/* Mission Section */}
                 <div className="mb-12 grid gap-8 md:grid-cols-2 md:gap-12">
-                    <div className="space-y-6">
+                    <div className="lg:space-y-6 space-y-4">
                         <Image
                             src="/icons/rocket-icon.svg"
                             alt="Logo"
                             width={64}
                             height={64}
-                            className="h-16 w-16"
+                            className="lg:size-16 size-12"
                         />
-                        <h2 className="font-hind-siliguri font-semibold text-[#1D3200] text-[55px] leading-[60.5px] tracking-[-0.01em]">
+                        <h2 className="font-semibold text-[#1D3200] lg:text-5xl text-3xl lg:leading-[60.5px] tracking-[-0.01em]">
                             আমাদের মিশন
                         </h2>
-                        <p className="max-w-[480px] text-[#1D3200] text-xl font-noto-sans leading-9">
-                            অনেক সময় আমরা ভিশন এবং মিশন নিয়ে বিভ্রান্ত হতে পারি। এখানে যা উল্লেখ করা হয়েছে, তা হলো ভিশন, যা আমাদের দীর্ঘমেয়াদী লক্ষ্য এবং সামগ্রিক দৃষ্টিভঙ্গি। <br />
+                        <p className="max-w-[480px] text-[#1D3200] lg:text-xl text-base font-noto-sans lg:leading-9">
+                            অনেক সময় আমরা ভিশন এবং মিশন নিয়ে বিভ্রান্ত হতে পারি। এখানে যা উল্লেখ করা হয়েছে, তা হলো ভিশন, যা আমাদের দীর্ঘমেয়াদী লক্ষ্য এবং সামগ্রিক দৃষ্টিভঙ্গি।
+                            <br />
+                            <br />
                             মিশন হলো সেই নির্দিষ্ট উপায়, যার মাধ্যমে আমরা ধাপে ধাপে সেই লক্ষ্য অর্জন করতে পারি।
                         </p>
                     </div>
                     <div className="flex items-center justify-center">
-                        <div className="relative h-48 w-48 md:h-64 md:w-64">
+                        <div className="relative size-48 md:size-64">
                             <Image
                                 src="/backgrounds/mission.svg"
                                 alt="Illustration"
@@ -139,7 +141,7 @@ export default function OurMission()
                     />
                 </div>
 
-                <p className="max-w-[468.63px] mx-auto text-center justify-start text-lime-950 text-2xl font-medium font-noto-sans leading-9 mt-[60px]">
+                <p className="max-w-[468.63px] mx-auto text-center justify-start text-lime-950 lg:text-2xl text-base font-medium font-noto-sans lg:leading-9 mt-[60px]">
                     এখানে, আমরা সামারি তুলে ধরেছি। আমাদের বিস্তারিত হোয়াইট পেপার আসছে শীঘ্রই।
                 </p>
             </div>
