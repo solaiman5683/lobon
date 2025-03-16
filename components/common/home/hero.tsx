@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 function Hero()
 {
@@ -17,14 +18,16 @@ function Hero()
                     অবদানই নেতৃত্বের আসল মাপকাঠি
                 </h1>
 
-                <p className="font-noto-sans font-medium lg:text-[22px] text-base leading-[33px] text-center max-w-3xl mx-auto text-[#1D3200]">
+                <p className="font-noto-sans font-medium lg:text-[22px] text-base leading-relaxed lg:leading-[33px] text-center max-w-3xl mx-auto text-[#1D3200]">
                     আমরা একটি ওপেন-সোর্স ভিত্তিক স্মার্ট রাজনৈতিক ডিজিটাল প্ল্যাটফর্ম তৈরি করছি, যেখানে স্বচ্ছতা এবং সুশৃঙ্খল ব্যবস্থার মাধ্যমে নেতৃত্ব নির্ধারিত হবে। এখানে ক্রেডিট স্কোর ব্যবস্থার মাধ্যমে আপনার আইডিয়া, সমস্যা সমাধান এবং কমিউনিটির জন্য অবদানই হবে নেতৃত্বের একমাত্র মানদণ্ড। টাকা বা প্রভাব নয়, আপনার কাজই আপনাকে এগিয়ে নিয়ে যাবে। এই প্ল্যাটফর্ম সম্পূর্ণ অটোমেটিক এবং ট্রান্সপারেন্ট, যা দুর্নীতির কোনো সুযোগ রাখে না। সব সিদ্ধান্ত এবং প্রক্রিয়া ওপেন ও যাচাইযোগ্য।
                 </p>
 
                 <div className="mb-8">
-                    <Button className="text-[#000000] hover:bg-[#86CD58] bg-[#86CD58] px-5 py-3 rounded-full font-hind-siliguri font-semibold text-[18px] leading-[24px]">
-                        জয়েন করুন
-                    </Button>
+                    <Link href="/wishlist">
+                        <Button className="text-[#000000] hover:bg-[#86CD58] bg-[#86CD58] px-5 py-3 rounded-full font-hind-siliguri font-semibold text-[18px] leading-[24px]">
+                            জয়েন করুন
+                        </Button>
+                    </Link>
                 </div>
 
                 <Image
@@ -32,7 +35,7 @@ function Hero()
                     alt=""
                     width={1920}
                     height={300}
-                    className="w-full h-auto lg:block hidden"   
+                    className="w-full h-auto lg:block hidden"
                     priority
                 />
                 <Image

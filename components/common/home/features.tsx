@@ -51,16 +51,16 @@ export default function Features()
         <div className="bg-[#0A221F] py-12 lg:py-32 px-4 lg:px-0">
             <div className="mx-auto max-w-5xl flex flex-col justify-center items-center">
                 <div className=" flex flex-col gap-5 max-w-[579px]">
-                    <h2 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold text-white ">
+                    <h2 className="text-center justify-start text-white lg:text-5xl text-3xl font-medium lg:leading-[55px]">
                         কেন এটিকে ওপেন-সোর্স বলা হচ্ছে?
                     </h2>
-                    <p className="font-noto-sans font-normal text-[18px] leading-[24px] text-center text-white mb-[70px] mx-auto">
+                    <p className="font-noto-sans font-normal lg:text-[18px] text-base lg:leading-[24px] text-center text-white mb-[70px] mx-auto">
                         সবার জন্য সমান সুযোগ তৈরি করা, যোগাযে কাজে, অবদান, এবং সফটয়্যার
                         সমাধানের দক্ষতা হয়ে ওঠে নেতৃত্বের একমাত্র মানদণ্ড।
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-6 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-6 gap-4 w-[300px] lg:w-full">
                     {openSourceReasons.map((item, index) =>
                     {
                         return (
