@@ -1,15 +1,13 @@
 "use client";
 
-import { NAVIGATION } from "@/config";
 import { cn } from "@/lib/utils";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Icons } from "./icons";
 import { Button } from "./ui/button";
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent } from "./ui/sheet";
 
 export default function Navbar()
 {
@@ -64,7 +62,7 @@ export default function Navbar()
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <Icons.logo className="h-auto w-12" />
           </Link>
-          <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
+          {/* <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
             {NAVIGATION.map((item) => (
               <Link
                 key={item.href}
@@ -76,7 +74,7 @@ export default function Navbar()
                 {item.title}
               </Link>
             ))}
-          </div>
+          </div> */}
           <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
             <div className="flex gap-1">
               <Link href="/wishlist">
@@ -95,10 +93,10 @@ export default function Navbar()
               href="/"
               className="flex items-center gap-2 font-semibold w-fit"
             >
-              <Icons.logo className="h-auto w-10" />
+              <Icons.logo className="h-auto w-8" />
             </Link>
             <div>
-              <SheetTrigger className="ml-2" asChild>
+              {/* <SheetTrigger className="ml-2" asChild>
                 <Button
                   variant="outline"
                   size="icon"
@@ -107,11 +105,18 @@ export default function Navbar()
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Toggle navigation menu</span>
                 </Button>
-              </SheetTrigger>
+              </SheetTrigger> */}
+              <Link href="/wishlist" className="w-full">
+                <Button
+                  className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear w-full"
+                >
+                  Wishlist
+                </Button>
+              </Link>
             </div>
           </div>
           <SheetContent closeButtonClassName="text-[#EDF4E3] bg-black ring-0 focus:ring-0 p-1" side="right" className="bg-[#EDF4E3] py-14 z-[999999] flex flex-col gap-8">
-            <nav className="grid gap-6 text-lg font-medium bg-[#EDF4E3]">
+            {/* <nav className="grid gap-6 text-lg font-medium bg-[#EDF4E3]">
               {NAVIGATION.map((item) => (
                 <SheetClose asChild key={item.href}>
                   <Link
@@ -127,7 +132,7 @@ export default function Navbar()
                   </Link>
                 </SheetClose>
               ))}
-            </nav>
+            </nav> */}
             <Link href="/wishlist" className="w-full">
               <Button
                 className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear w-full"

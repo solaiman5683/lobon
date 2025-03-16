@@ -1,7 +1,8 @@
 'use client';
 
+import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import PhoneInput from "./phoneInput";
 
@@ -52,7 +53,6 @@ async function postToNocoDB(inputData: any)
 
     try {
         const response = await axios.request(options);
-        console.log("Record created successfully:", response.data);
         return response.data;
     } catch (error: any) {
         console.error(
@@ -63,29 +63,7 @@ async function postToNocoDB(inputData: any)
     }
 }
 
-async function getFromNocoDB()
-{
-    const options = {
-        method: "GET",
-        url: "https://crm.lobon.org/api/v2/tables/mezkublc4xdsf3h/records",
-        headers: {
-            "xc-token": "rLTPoRJbaJCawC-KdapuQj42liIhINFJLC5BgFVT",
-            "Content-Type": "application/json"
-        }
-    };
 
-    try {
-        const response = await axios.request(options);
-        console.log("Records fetched successfully:", response.data);
-        return response.data; // Return the fetched records
-    } catch (error: any) {
-        console.error(
-            "Error fetching from NocoDB:",
-            error?.response ? error?.response?.data : error?.message
-        );
-        throw error; // Throw error for handling by the caller
-    }
-}
 
 export default function JoinForm()
 {
@@ -98,21 +76,18 @@ export default function JoinForm()
         Occupassion: occupations[0].slug,
         About: '',
         Contribution: '',
+        Country: '',
     });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const QueryClient = useQueryClient();
 
-    const handleSubmit = (e: any) =>
+    const handleSubmit = async (e: any) =>
     {
         e.preventDefault();
-        console.log(formValues);
-        // check if all fields are filled
-        const isFormValid = Object.values(formValues).every((value) => value !== '');
-        if (!isFormValid) {
-            toast.error('অনুগ্রহ করে সব ফিল্ড পূরণ করুন');
-            return;
-        }
+        setIsSubmitting(true);
         // send form data to server
         try {
-            postToNocoDB(formValues);
+            await postToNocoDB(formValues);
             toast.success('আপনার তথ্য সফলভাবে সাবমিট করা হয়েছে');
 
             // Reset form values
@@ -125,17 +100,16 @@ export default function JoinForm()
                 Occupassion: occupations[0].slug,
                 About: '',
                 Contribution: '',
+                Country: '',
             });
+            QueryClient.invalidateQueries({ queryKey: ['usersData'] });
         } catch (error) {
-            console.log(error, 'hello');
+            console.log(error);
             toast.error('কিছু একটা সমস্যা হয়েছে, দয়া করে আবার চেষ্টা করুন');
+        } finally {
+            setIsSubmitting(false);
         }
     };
-
-    useEffect(() =>
-    {
-        getFromNocoDB();
-    }, []);
 
     return (
         <div className="bg-[#0A221F] lg:py-32 py-8 px-4 lg:px-0">
@@ -145,7 +119,7 @@ export default function JoinForm()
 
                 <form onSubmit={handleSubmit} className="space-y-6 text-white">
                     <div className="space-y-2">
-                        <label htmlFor="name" className="text-[22px] font-medium leading-[33px]">আপনার এনআইডি/পাসপোর্ট অনুযায়ী নাম?</label>
+                        <label htmlFor="name" className="lg:text-[22px] text-lg font-medium leading-[33px]">আপনার এনআইডি/পাসপোর্ট অনুযায়ী নাম?</label>
                         <input
                             type="text"
                             name="name"
@@ -156,7 +130,7 @@ export default function JoinForm()
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
                     </div>
                     <div className="space-y-2">
-                        <label className="text-[22px] font-medium leading-[33px]">আপনার আমাদের সাথে কীভাবে অ্যাক্টিভিটিতে অংশ নিতে চান?</label>
+                        <label className="lg:text-[22px] text-lg font-medium leading-[33px]">আপনার আমাদের সাথে কীভাবে অ্যাক্টিভিটিতে অংশ নিতে চান?</label>
                         <div className="flex gap-8">
                             {
                                 activityTypes.map((activity) => (
@@ -173,7 +147,7 @@ export default function JoinForm()
                     </div>
                     <PhoneInput formValues={formValues} setFormValues={setFormValues} />
                     <div className="space-y-2">
-                        <label htmlFor="email" className="text-[22px] font-medium leading-[33px]">
+                        <label htmlFor="email" className="lg:text-[22px] text-lg font-medium leading-[33px]">
                             আপনার ইমেইল?
                         </label>
                         <input
@@ -186,7 +160,7 @@ export default function JoinForm()
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
                     </div>
                     <div className="space-y-2">
-                        <label htmlFor="district" className="text-[22px] font-medium leading-[33px]">
+                        <label htmlFor="district" className="lg:text-[22px] text-lg font-medium leading-[33px]">
                             আপনার এনআইডি/পাসপোর্ট অনুযায়ী কোন জেলা প্রতিনিধিত্ব করেন?
                         </label>
                         <input
@@ -199,7 +173,7 @@ export default function JoinForm()
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
                     </div>
                     <div className="space-y-2">
-                        <label className="text-[22px] font-medium leading-[33px]">
+                        <label className="lg:text-[22px] text-lg font-medium leading-[33px]">
                             আপনার পেশা?
                         </label>
                         <div className="flex flex-wrap gap-8">
@@ -220,7 +194,7 @@ export default function JoinForm()
                     </div>
 
                     <div className="space-y-2">
-                        <label htmlFor="url" className="text-[22px] font-medium leading-[33px]">
+                        <label htmlFor="url" className="lg:text-[22px] text-lg font-medium leading-[33px]">
                             আপনার সম্পর্কে আমরা কীভাবে জানতে পারি? ex url: LinkedIn, Github, Website, Research Paper, Facebook, etc.
                         </label>
                         <input
@@ -233,20 +207,21 @@ export default function JoinForm()
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
                     </div>
                     <div className="space-y-2">
-                        <label htmlFor="contributionMessage" className="text-[22px] font-medium leading-[33px]">
+                        <label htmlFor="contributionMessage" className="lg:text-[22px] text-lg font-medium leading-[33px]">
                             আপনি কিভাবে আমদেরকে কট্রিবিউট করতে চান? (optional)
                         </label>
                         <textarea
                             name="contributionMessage"
                             id="contributionMessage"
-                            required
                             onChange={(e) => setFormValues({ ...formValues, Contribution: e.target.value })}
                             value={formValues.Contribution}
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
                     </div>
 
                     <button type="submit" className="px-5 py-3 bg-[#c7ff7d] rounded-[10px]">
-                        <span className="text-[#1d3200] text-lg font-semibold leading-normal">Submit</span>
+                        <span className="text-[#1d3200] text-lg font-semibold leading-normal">
+                            {isSubmitting ? 'সাবমিট হচ্ছে...' : 'সাবমিট'}
+                        </span>
                     </button>
                 </form>
             </div>

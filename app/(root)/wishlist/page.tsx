@@ -1,21 +1,67 @@
 'use client';
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import moment from "moment";
 import dynamic from "next/dynamic";
-import JoinForm from "./component/join-form";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import JoinForm from "./component/join-form";
 
 const Map = dynamic(() => import("./component/map"), { ssr: false });
 
+// Fetch function with specific fields
+async function getFromNocoDB()
+{
+
+    const options = {
+        method: "GET",
+        url: "https://crm.lobon.org/api/v2/tables/mezkublc4xdsf3h/records",
+        headers: {
+            "xc-token": "rLTPoRJbaJCawC-KdapuQj42liIhINFJLC5BgFVT",
+            "Content-Type": "application/json",
+        },
+        params: {
+            fields: "Id,Name,Country,District,CreatedAt",
+            offset: 0,
+            limit: 1000,
+            sort: "-CreatedAt",
+        },
+    };
+
+    try {
+        const response = await axios.request(options);
+        const oneDayAgo = moment().subtract(24, 'hours');
+        const recentEntries = response.data.list.filter((item: any) =>
+        {
+            return moment(item.CreatedAt).isAfter(oneDayAgo);
+        });
+        console.log("Fetching from NocoDB");
+        return {
+            ...response.data,
+            last24Hours: recentEntries,
+        };
+    } catch (error: any) {
+        console.error(
+            "Error fetching from NocoDB:",
+            error?.response ? error?.response?.data : error?.message
+        );
+        throw error;
+    }
+}
 
 export default function PlatformPage()
 {
+    const { data: records, error, isLoading } = useQuery({
+        queryKey: ["usersData"],
+        queryFn: getFromNocoDB,
+    });
     return (
         <div className="bg-[#EDF4E3]">
             <div className="container relative pt-[128px] py-12 space-y-8">
-                <h2 className="text-[#1d3200] text-center lg:text-[45px] text-3xl font-semibold  leading-[49.50px]">মোট যোগ দিয়েছে - <span className="text-[#ff3968]">২,০৪৫</span> জন</h2>
+                <h2 className="text-[#1d3200] text-center lg:text-[45px] text-2xl font-semibold  leading-[49.50px]">মোট যোগ দিয়েছে  -  <span className="text-[#ff3968]">{Math.max((records?.pageInfo?.totalRows || 0), 22)}</span> জন</h2>
 
                 <div className="flex justify-center items-center">
-                    <button className="px-5 py-2.5 bg-[#86cd58] rounded-lg text-center justify-center text-[#1d3200] lg:text-lg text-sm font-semibold leading-tight">🔥 লাস্ট ২৪ ঘণ্টায় মোট যোগ দিয়েছে - ৪৮৫ জন 🔥</button>
+                    <button className="px-4 py-2.5 bg-[#86cd58] rounded-lg text-center justify-center text-[#1d3200] lg:text-lg text-sm font-semibold leading-tight">🔥 লাস্ট ২৪ ঘণ্টায় মোট যোগ দিয়েছে - {records?.last24Hours?.length} জন 🔥</button>
                 </div>
 
                 <div className="flex justify-center">

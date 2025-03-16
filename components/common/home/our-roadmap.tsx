@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function OurRoadmap()
 {
@@ -13,11 +14,11 @@ export default function OurRoadmap()
                 <Image src="/images/roadmap.svg" width={1200} height={3355} alt="Next Gen" priority className="h-auto w-full pt-8 pointer-events-none lg:block hidden" />
                 <Image src="/images/roadmap-mobile.svg" width={1200} height={3355} alt="Next Gen" priority className="h-auto w-full pt-8 pointer-events-none lg:hidden" />
 
-                <div className="flex justify-center">
+                <Link href='/wishlist' className="flex justify-center">
                     <Button className="bg-[#86CD58] hover:bg-[#86CD58] text-black text-lg font-semibold leading-normal rounded-full px-8 py-3 h-auto">
                         জয়েন করুন
                     </Button>
-                </div>
+                </Link>
             </div>
         </div>
     )

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function TeamGrid()
 {
@@ -26,9 +27,11 @@ export default function TeamGrid()
             </div>
             <div className="relative z-10 text-center mt-8 space-y-4">
                 <p className="text-center text-[#1d3200] text-3xl font-semibold leading-[33px]">633 অন্যান্য</p>
-                <Button className="bg-[#86cd58] hover:bg-[#88d157] text-black text-lg font-semibold leading-normal rounded-full px-8">
-                    জয়েন করুন
-                </Button>
+                <Link href="/wishlist" className="inline-block">
+                    <Button className="bg-[#86cd58] hover:bg-[#88d157] text-black text-lg font-semibold leading-normal rounded-full px-8">
+                        জয়েন করুন
+                    </Button>
+                </Link>
             </div>
         </div>
     );
