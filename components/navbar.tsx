@@ -92,7 +92,7 @@ export default function Navbar()
         <Sheet>
           <div className="w-full flex md:hidden justify-between items-center">
             <Link
-              href="#"
+              href="/"
               className="flex items-center gap-2 font-semibold w-fit"
             >
               <Icons.logo className="h-auto w-10" />

@@ -9,22 +9,13 @@ export default function TeamGrid()
     return (
         <div className="max-w-7xl mx-auto px-4 lg:py-32 py-12 space-y-6">
             {/* Bengali Title */}
-            <h2 className="max-w-[531px] mx-auto text-center text-[#1d3200] lg:text-[50px] text-3xl font-medium lg:leading-[55px]">আমরা সবাই রাজা আমাদের এই রাজার রাজত্বে</h2>
+            <h2 className="max-w-[531px] mx-auto text-center text-[#1d3200] lg:text-[50px] text-3xl font-medium lg:leading-[55px]">আসছে ফাগুন, <br className="lg:hidden" /> আমরা <br className="lg:block hidden" /> হবো দ্বিগুণ</h2>
 
             <div className="relative">
                 {/* Top row with different photos */}
-                <div className="grid grid-cols-6 md:grid-cols-12 gap-2 mb-4">
-                    {topRowPhotos.map((_, index) => (
-                        <div key={`top-${index}`} className="aspect-square relative">
-                            <Image
-                                src={`https://i.pravatar.cc/200?img=${Math.floor(Math.random() * 70)}`}
-                                alt={`Profile ${index + 1}`}
-                                fill
-                                className="object-cover rounded-md"
-                                priority
-                            />
-                        </div>
-                    ))}
+                <div className="lg:-mb-12 pointer-events-none">
+                    <Image src="/images/team.png" alt="Team members" width={1988} height={1178} className="rounded-lg w-full lg:block hidden" />
+                    <Image src="/images/team-mobile.png" alt="Team members" width={1988} height={1178} className="rounded-lg w-full lg:hidden" />
                 </div>
 
 
