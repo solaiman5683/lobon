@@ -57,7 +57,7 @@ export default function Navbar()
       initial="visible"
       animate={isVisible ? "visible" : "hidden"}
     >
-      <header className={cn("container flex py-4 items-center gap-4")}>
+      <header className={cn("container flex py-2 items-center gap-4")}>
         <nav className="hidden flex-col md:flex md:flex-row md:items-center md:justify-between w-full h-full">
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <Icons.logo className="h-auto w-12" />

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import AnimatedSVG from "../animated-svg";
 
 function Hero()
 {
@@ -63,22 +64,46 @@ function Hero()
                 className="w-full h-auto lg:hidden block"
                 priority
             />
-            <Image
+            <AnimatedSVG duration={1.5} className="w-[355px] lg:block hidden h-auto absolute top-0 left-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="355" height="537" viewBox="0 0 355 537" fill="none">
+                    <g clipPath="url(#clip0_734_8821)">
+                        <path d="M293.943 -31.4952C31.8717 178.139 314.525 425.87 336.204 330.555C353.624 253.965 128.182 165.973 51.5821 396.421C27.917 467.616 -20.9566 541.294 -125.624 505.326C-201.546 479.236 -272.445 371.265 -272.991 316.631" stroke="#A9AFFB" strokeWidth="15" strokeLinecap="round" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_734_8821">
+                            <rect width="355" height="537" fill="white" />
+                        </clipPath>
+                    </defs>
+                </svg>
+            </AnimatedSVG>
+            <AnimatedSVG duration={1.5} className="w-[358px] lg:block hidden h-auto absolute top-0 right-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="358" height="676" viewBox="0 0 358 676" fill="none">
+                    <g clipPath="url(#clip0_734_8822)">
+                        <path d="M392.798 738.042C292.653 422.582 -5.926 464.211 62.5578 541.811C94.5 578.004 265.5 486.504 189.5 334.504C139.563 234.63 263.503 200.116 296.5 138.004C390 -37.9956 168.601 -99.2198 222.5 -76.4956" stroke="#F4BDFC" strokeWidth="15" strokeLinecap="round" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_734_8822">
+                            <rect width="358" height="676" fill="white" />
+                        </clipPath>
+                    </defs>
+                </svg>
+            </AnimatedSVG>
+            {/* <Image
                 src="/images/line-1.svg"
-                alt="Hero illustration showing people interacting with technology"
-                width={500}
-                height={600}
-                className="w-[500px] lg:block hidden h-auto absolute top-0 left-0"
+                alt="Line illustration"
+                width={355}
+                height={537}
+                className="w-[355px] lg:block hidden h-auto absolute top-0 left-0"
                 priority
-            />
-            <Image
+            /> */}
+            {/* <Image
                 src="/images/line-2.svg"
-                alt="Hero illustration showing people interacting with technology"
-                width={420}
-                height={730}
-                className="w-[300px] lg:block hidden h-auto absolute top-0 right-0"
+                alt="Line illustration"
+                width={358}
+                height={676}
+                className="w-[358px] lg:block hidden h-auto absolute top-0 right-0"
                 priority
-            />
+            /> */}
         </main>
     );
 }

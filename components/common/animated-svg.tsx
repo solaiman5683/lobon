@@ -6,9 +6,11 @@ import React, { ReactElement, useRef } from "react";
 interface AnimatedSVGProps
 {
   children: ReactElement<React.SVGProps<SVGSVGElement>>;
+  className?: string;
+  duration?: number;
 }
 
-const AnimatedSVG: React.FC<AnimatedSVGProps> = ({ children }) =>
+const AnimatedSVG: React.FC<AnimatedSVGProps> = ({ children, className, duration = 2 }) =>
 {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true }); // Animate only once when in view
@@ -75,8 +77,8 @@ const AnimatedSVG: React.FC<AnimatedSVGProps> = ({ children }) =>
                         : { pathLength: 0, fillOpacity: 0 }
                     }
                     transition={{
-                      pathLength: { duration: 6, ease: "easeInOut" },
-                      fillOpacity: { duration: 1, delay: 1.5, ease: "easeIn" },
+                      pathLength: { duration: duration, ease: "easeInOut" },
+                      fillOpacity: { duration: duration * 0.25, delay: duration * 0.25, ease: "easeIn" },
                     }}
                   />
                 );
@@ -90,7 +92,7 @@ const AnimatedSVG: React.FC<AnimatedSVGProps> = ({ children }) =>
     });
   };
 
-  return <div ref={ref}>{animatePaths(children)}</div>;
+  return <div ref={ref} className={className}>{animatePaths(children)}</div>;
 };
 
 export default AnimatedSVG;
