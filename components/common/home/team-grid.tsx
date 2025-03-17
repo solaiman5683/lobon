@@ -1,12 +1,47 @@
+'use client';
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 
+async function getFromNocoDB()
+{
+
+    const options = {
+        method: "GET",
+        url: "https://crm.lobon.org/api/v2/tables/mezkublc4xdsf3h/records",
+        headers: {
+            "xc-token": "rLTPoRJbaJCawC-KdapuQj42liIhINFJLC5BgFVT",
+            "Content-Type": "application/json",
+        },
+        params: {
+            // fields: "Id,Name,Country,District,CreatedAt",
+            offset: 0,
+            limit: 1,
+        },
+    };
+
+    try {
+        const response = await axios.request(options);
+        return {
+            ...response.data,
+        };
+    } catch (error: any) {
+        console.error(
+            "Error fetching from NocoDB:",
+            error?.response ? error?.response?.data : error?.message
+        );
+        throw error;
+    }
+}
+
 export default function TeamGrid()
 {
-    // Top row with different photos
-    const topRowPhotos = Array(84).fill("");
-
+    const { data: records } = useQuery({
+        queryKey: ["usersData"],
+        queryFn: getFromNocoDB,
+    });
     return (
         <div className="max-w-7xl mx-auto px-4 lg:py-32 py-12 space-y-6">
             {/* Bengali Title */}
@@ -26,7 +61,7 @@ export default function TeamGrid()
                 {/* Online count and button - positioned on top with high z-index */}
             </div>
             <div className="relative z-10 text-center mt-8 space-y-4">
-                <p className="text-center text-[#1d3200] text-3xl font-semibold leading-[33px]">633 অন্যান্য</p>
+                <p className="text-center text-[#1d3200] text-3xl font-semibold leading-[33px]">{Math.max((records?.pageInfo?.totalRows || 0), 22)} অন্যান্য</p>
                 <Link href="/wishlist" className="inline-block">
                     <Button className="bg-[#86cd58] hover:bg-[#88d157] text-black text-lg font-semibold leading-normal rounded-full px-8">
                         জয়েন করুন
