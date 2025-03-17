@@ -81,12 +81,16 @@ const PhoneInput = ({ formValues, setFormValues }: any) =>
     // Update formValues when phone number or country code changes
     useEffect(() =>
     {
+        if (formValues.Phone === `${selectedCountry?.code}${phoneNumber}`) {
+            return;
+        }
         setFormValues({
             ...formValues,
             Phone: `${selectedCountry?.code}${phoneNumber}`,
             Country: selectedCountry?.name,
+            CountryCode: selectedCountry?.code,
         });
-    }, [selectedCountry, phoneNumber]);
+    }, [selectedCountry, phoneNumber, formValues, setFormValues]);
 
     return (
         <div className="space-y-6">
@@ -101,7 +105,7 @@ const PhoneInput = ({ formValues, setFormValues }: any) =>
                     >
                         <SelectTrigger
                             className={cn(
-                                "rounded-[10px] px-2 py-3.5 h-auto bg-[#edf4e3]/10 outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 focus:outline-[#86cd58] ring-0 focus:ring-0",
+                                "rounded-[10px] px-4 py-3.5 text-lg h-auto bg-[#edf4e3]/10 outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 focus:outline-[#86cd58] ring-0 focus:ring-0",
                             )}
                         >
                             <SelectValue placeholder="Select Country" />
@@ -141,6 +145,7 @@ const PhoneInput = ({ formValues, setFormValues }: any) =>
                         type="number"
                         name="phone"
                         id="phone"
+                        required
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                         className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg"

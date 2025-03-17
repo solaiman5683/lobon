@@ -1,5 +1,8 @@
 'use client';
 
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { DISTRICT } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
@@ -35,7 +38,6 @@ const activityTypes = [
         name: 'সিক্রেটলি',
     }
 ]
-
 
 // Function to post data to NocoDB table
 async function postToNocoDB(inputData: any)
@@ -77,6 +79,7 @@ export default function JoinForm()
         About: '',
         Contribution: '',
         Country: '',
+        CountryCode: '',
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const QueryClient = useQueryClient();
@@ -85,6 +88,7 @@ export default function JoinForm()
     {
         e.preventDefault();
         setIsSubmitting(true);
+        console.log(formValues);
         // send form data to server
         try {
             await postToNocoDB(formValues);
@@ -92,15 +96,14 @@ export default function JoinForm()
 
             // Reset form values
             setFormValues({
+                ...formValues,
                 Name: '',
                 Activity: activityTypes[0].slug,
-                Phone: '',
                 Email: '',
                 District: '',
                 Occupassion: occupations[0].slug,
                 About: '',
                 Contribution: '',
-                Country: '',
             });
             QueryClient.invalidateQueries({ queryKey: ['usersData'] });
         } catch (error) {
@@ -163,14 +166,45 @@ export default function JoinForm()
                         <label htmlFor="district" className="lg:text-[22px] text-lg font-medium leading-[33px]">
                             আপনার এনআইডি/পাসপোর্ট অনুযায়ী কোন জেলা প্রতিনিধিত্ব করেন?
                         </label>
-                        <input
+                        {/* <input
                             type="text"
                             name="district"
                             id="district"
                             required
                             onChange={(e) => setFormValues({ ...formValues, District: e.target.value })}
                             value={formValues.District}
-                            className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
+                            className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" /> */}
+                        <div className="w-full">
+                            <Select
+                                value={formValues.District}
+                                onValueChange={(value) => setFormValues({ ...formValues, District: value })}
+                            >
+                                <SelectTrigger
+                                    className={cn(
+                                        "rounded-[10px] px-4 py-3.5 h-auto bg-[#edf4e3]/10 outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 focus:outline-[#86cd58] ring-0 focus:ring-0 text-lg",
+                                    )}
+                                >
+                                    <SelectValue
+                                        placeholder="জেলা নির্বাচন করুন"
+                                    />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <div className="max-h-[300px] overflow-y-auto">
+                                        {DISTRICT.map((district) => (
+                                            <SelectItem
+                                                key={district.name}
+                                                value={district.name}
+                                                className="flex items-center gap-2"
+                                            >
+                                                <div className="flex items-center gap-2">
+                                                    <span className="min-w-max">{district.name}</span>
+                                                </div>
+                                            </SelectItem>
+                                        ))}
+                                    </div>
+                                </SelectContent>
+                            </Select>
+                        </div>
                     </div>
                     <div className="space-y-2">
                         <label className="lg:text-[22px] text-lg font-medium leading-[33px]">
