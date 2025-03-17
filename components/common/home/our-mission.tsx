@@ -88,10 +88,10 @@ export default function OurMission()
                                     {<feature.icon className="size-[40px] text-[#434C39]" />}
                                 </span>
                             </div>
-                            <p className="font-hind-siliguri lg:mb-2 font-medium lg:text-[24px] text-lg leading-[30px] tracking-[0%]">
+                            <p className="mb-2 font-medium lg:text-2xl text-xl leading-[30px]">
                                 {feature.title}
                             </p>
-                            <p className="font-noto-sans font-normal lg:text-[18px] text-xs lg:leading-[24px] tracking-[0%]">
+                            <p className="p-card">
                                 {feature.description}
                             </p>
                         </div>
@@ -111,7 +111,7 @@ export default function OurMission()
                         <h2 className="font-semibold text-[#1D3200] lg:text-5xl text-3xl lg:leading-[60.5px] tracking-[-0.01em]">
                             আমাদের মিশন
                         </h2>
-                        <p className="max-w-[480px] text-[#1D3200] lg:text-xl text-base font-noto-sans lg:leading-9">
+                        <p className="max-w-[480px] text-[#1D3200] p1">
                             অনেক সময় আমরা ভিশন এবং মিশন নিয়ে বিভ্রান্ত হতে পারি। এখানে যা উল্লেখ করা হয়েছে, তা হলো ভিশন, যা আমাদের দীর্ঘমেয়াদী লক্ষ্য এবং সামগ্রিক দৃষ্টিভঙ্গি।
                             <br />
                             <br />
@@ -141,7 +141,7 @@ export default function OurMission()
                     />
                 </div>
 
-                <p className="max-w-[468.63px] mx-auto text-center justify-start text-lime-950 lg:text-2xl text-base font-medium font-noto-sans lg:leading-9 mt-[60px]">
+                <p className="max-w-[468.63px] mx-auto text-center justify-start text-[#1D3200] p1 mt-[60px]">
                     এখানে, আমরা সামারি তুলে ধরেছি। আমাদের বিস্তারিত হোয়াইট পেপার আসছে শীঘ্রই।
                 </p>
             </div>

@@ -81,7 +81,7 @@ export default function Navbar()
                 <Button
                   className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear hover:scale-110"
                 >
-                  Wishlist
+                  জয়েন করুন
                 </Button>
               </Link>
             </div>
@@ -110,7 +110,7 @@ export default function Navbar()
                 <Button
                   className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear w-full"
                 >
-                  Wishlist
+                  জয়েন করুন
                 </Button>
               </Link>
             </div>
@@ -137,7 +137,7 @@ export default function Navbar()
               <Button
                 className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear w-full"
               >
-                Wishlist
+                জয়েন করুন
               </Button>
             </Link>
           </SheetContent>

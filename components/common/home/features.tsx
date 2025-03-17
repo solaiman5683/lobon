@@ -54,7 +54,7 @@ export default function Features()
                     <h2 className="text-center justify-start text-white lg:text-5xl text-3xl font-medium lg:leading-[55px]">
                         কেন এটিকে ওপেন-সোর্স বলা হচ্ছে?
                     </h2>
-                    <p className="font-noto-sans font-normal lg:text-[18px] text-base lg:leading-[24px] text-center text-white mb-[70px] mx-auto">
+                    <p className="p1 text-center text-white mb-[70px] mx-auto">
                         সবার জন্য সমান সুযোগ তৈরি করা, যোগাযে কাজে, অবদান, এবং সফটয়্যার
                         সমাধানের দক্ষতা হয়ে ওঠে নেতৃত্বের একমাত্র মানদণ্ড।
                     </p>
@@ -68,7 +68,7 @@ export default function Features()
                                 className="bg-[#EDF4E3] rounded-lg py-8 px-5 relative mb-[35px]"
                                 key={index}
                             >
-                                <div className="p-1 absolute -top-[32px] left-[50%] translate-x-[-50%] border border-[#9FE870]  rounded-[12px] bg-[#9FE870] flex items-center justify-center text-[#1a2e05]">
+                                <div className="p-1 absolute -top-[25px] left-[50%] translate-x-[-50%] border border-[#9FE870]  rounded-[12px] bg-[#9FE870] flex items-center justify-center text-[#1a2e05]">
                                     {/* <Icons.digitalFirst className="w-10 h-10 " /> */}
                                     {item.icon}
                                 </div>
@@ -77,7 +77,7 @@ export default function Features()
                                         {item.title}
                                     </h4>
                                     
-                                    <p className="font-noto-sans font-normal text-base leading-[24px] text-center text-[#1D3200]">
+                                    <p className="p-card text-center text-[#1D3200]">
                                         {item.description}
                                     </p>
                                 </div>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 
 export default function WhyUs()
 {
@@ -7,7 +8,7 @@ export default function WhyUs()
                 <article className="space-y-8 flex flex-col justify-center items-center">
                     <h2 className="max-w-[531px] text-center justify-start text-white lg:text-5xl text-3xl font-medium lg:leading-[55px]">কেনো ডিজিটাল ফ্রাস্ট রাজনৈতিক দল?</h2>
 
-                    <p className="font-noto-sans font-medium lg:text-[22px] text-base lg:leading-[33px] text-center lg:text-left">
+                    <p className="p1 text-center lg:text-left">
                         বাংলাদেশে বর্তমানে ৯৫ কোটি মানুষের মধ্যে প্রায় ৫-৬ কোটি মানুষ
                         ফেসবুক এবং ইউটিউব ব্যবহার করেন। এই প্লাটফর্মগুলোর মাধ্যমে যেকোনো
                         তথ্য খুব দ্রুতিং পড়ে। এই ৫ কোটি মানুষ ইন্টারনেট তথ্যনির্ভর তারা
@@ -16,22 +17,13 @@ export default function WhyUs()
                         আলোচনা করবে, যারা হয়তো সরাসরি ডিজিটাল মাধ্যম যুক্ত নন।
                     </p>
 
-                    <div className="flex justify-center text-black rounded-lg w-full overflow-hidden">
-                        <div className="flex justify-center flex-col items-center w-[524px] bg-white rounded-lg">
-                            <div className="bg-[#434C39] text-white p-4 w-full ">
-                                <p className="text-lg font-semibold text-center">
-                                    190 Million Total population
-                                </p>
-                            </div>
-                            <div className="bg-[#86CD58] p-4 ">
-                                <p className="font-apercu-pro font-medium text-[14.56px] leading-[20.38px] text-center tracking-[-0.01em]">
-                                    50 Million <br /> Facebook/ Youtube User
-                                </p>
-                            </div>
+                    <div className="flex justify-center pointer-events-none">
+                        <div className="max-w-[524px]">
+                            <Image src="/images/user-ratio.png" width={524} height={524} alt="Why Us" className="w-full" />
                         </div>
                     </div>
 
-                    <p className="font-noto-sans font-medium lg:text-[22px] text-base leading-[33px] text-center lg:text-left">
+                    <p className="p1 text-center lg:text-left">
                         জুলাই-আগস্ট মাসে ফেসবুক হানিমুন বিরক্ত হওয়া বিকেন্দ্রভাবে ডিজিটাল
                         মাধ্যমের শক্তি প্রমাণ করেছে। ইত্যাবসরে ভিডিওগুলো দ্রুত ছড়িয়ে পড়ে,
                         যা মানুষকে আলোচনায় স্থগিতে সচেত উদ্বুদ্ধ করেছিল।
@@ -43,7 +35,7 @@ export default function WhyUs()
                         </p>
                     </blockquote>
 
-                    <p className="font-noto-sans font-medium lg:text-[22px] text-base lg:leading-[33px] text-center lg:text-left">
+                    <p className="p1 text-center lg:text-left">
                         বাংলাদেশে ডিজিটাল-প্রথম একটি রাজনৈতিক দল হতে পারে প্রতিটার অর্থে
                         বিপ্লবী। আমরা দ্রুত দেশের প্রতিটি গ্রামে পৌঁছাতে পারব এবং আমাদের
                         দৃষ্টিভঙ্গি নিয়ে মানুষকে একত্রিত করতে পারব। এতে আমরা না কেবলো
@@ -52,7 +44,7 @@ export default function WhyUs()
                         একটি শক্তিশালী রাজনৈতিক দল।
                     </p>
 
-                    <p className="font-noto-sans font-medium lg:text-[22px] text-base lg:leading-[33px] text-center lg:text-left">
+                    <p className="p1 text-center lg:text-left">
                         ডিজিটাল মাধ্যমের এই শক্তিকে কাজে লাগিয়ে আমরা একটি নতুন বাংলাদেশের
                         স্বপ্ন গড়ে তুলতে পারি।
                     </p>

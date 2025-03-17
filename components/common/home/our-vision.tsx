@@ -20,7 +20,7 @@ export default function OurVision()
             <h2 className="font-hind-siliguri font-semibold text-[#1D3200] lg:text-5xl text-3xl leading-[60.5px] tracking-[-0.01em]">
               আমাদের ভিশন
             </h2>
-            <p className="font-noto-sans font-medium lg:text-2xl text-base leading-[36px] text-[#1a2e05]">
+            <p className="p1 text-[#1a2e05]">
               &quot; <span className='text-[#84cc16]'>বাংলাদেশ ২.০</span> &quot; আমাদের জন্য আগাম প্রজন্ম। এটি বৈরাচার সমাজ থেকে
               মুক্তি এবং উন্নয়ন ভবিষ্যতের স্বপ্ন দেখার সাহস এনে দিয়েছিল। সাথিত
               এটি সময়ে টিকিয়ে রাখতে সক্ষম ছিল, কারই টিকনিক্যালের অভাব ছিলা
@@ -50,62 +50,62 @@ export default function OurVision()
         <div className="grid gap-12 md:grid-cols-2 text-[#1D3200]">
           {/* Strengths Column */}
           <div className="space-y-6">
-            <h3 className="font-trb font-normal italic lg:text-[34px] text-2xl leading-[30px] tracking-[0%] ">
+            <h3 className="font-trb font-normal italic lg:text-4xl text-2xl leading-[30px]">
               শক্তি:
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <div className="min-w-max">
-                  <Icons.fillCheckLight className="lg:size-8 size-6 rounded-[8.57px]  p-[2.86px] text-[#9FE870]" />
+                  <Icons.fillCheckLight className="size-8 rounded-[8.57px]  p-[2.86px] text-[#9FE870]" />
                 </div>
-                <span className="max-w-[330px] font-semibold lg:text-[24px] text-base leading-[30px] tracking-[0%]">
+                <span className="max-w-[330px] font-semibold lg:text-[24px] text-xl leading-[30px] tracking-[0%]">
                   চাপ ও দমন থেকে মুক্তির সাহস জুগিয়েছে।
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="min-w-max">
-                  <Icons.fillCheckLight className="lg:size-8 size-6 rounded-[8.57px]  p-[2.86px] text-[#9FE870]" />
+                  <Icons.fillCheckLight className="size-8 rounded-[8.57px] p-[2.86px] text-[#9FE870]" />
                 </div>
-                <span className="max-w-[330px] font-semibold lg:text-[24px] text-base leading-[30px] tracking-[0%]">
+                <span className="max-w-[330px] font-semibold lg:text-[24px] text-xl leading-[30px] tracking-[0%]">
                   বড় স্বপ্ন দেখার এবং ভিন্নভাবে চিন্তা করার মানসিকতা তৈরি করেছে।
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="min-w-max">
-                  <Icons.fillCheckLight className="lg:size-8 size-6 rounded-[8.57px]  p-[2.86px] text-[#9FE870]" />
+                  <Icons.fillCheckLight className="size-8 rounded-[8.57px]  p-[2.86px] text-[#9FE870]" />
                 </div>
-                <span className="max-w-[330px] font-semibold lg:text-[24px] text-base leading-[30px] tracking-[0%]">
+                <span className="max-w-[330px] font-semibold lg:text-[24px] text-xl leading-[30px] tracking-[0%]">
                   অনুপ্রেরণা জুগিয়েছে এবং পরিবর্তনের জন্য মানুষকে একত্রিত করেছে।
                 </span>
               </li>
             </ul>
           </div>
           <div className="space-y-6">
-            <h3 className="font-trb font-normal italic text-[34px] leading-[30px] tracking-[0%] text-[#FD9C02]">
+            <h3 className="font-trb font-normal italic lg:text-4xl text-2xl leading-[30px] text-[#FD9C02]">
               দুর্বলতা:
             </h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <div className="min-w-max">
-                  <Icons.fillCrossOrange className="lg:size-8 size-6 rounded-[8.57px] p-[2.86px] text-[#9FE870]" />
+                  <Icons.fillCrossOrange className="size-8 rounded-[8.57px] p-[2.86px] text-[#9FE870]" />
                 </div>
-                <span className="max-w-[270px] font-hind-siliguri font-semibold lg:text-[24px] text-base leading-[30px] tracking-[0%]">
+                <span className="max-w-[270px] font-hind-siliguri font-semibold lg:text-[24px] text-xl leading-[30px] tracking-[0%]">
                   কার্যকর এবং স্পষ্ট পরিকল্পনার অভাব।
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="min-w-max">
-                  <Icons.fillCrossOrange className="lg:size-8 size-6 rounded-[8.57px]  p-[2.86px] text-[#9FE870]" />
+                  <Icons.fillCrossOrange className="size-8 rounded-[8.57px]  p-[2.86px] text-[#9FE870]" />
                 </div>
-                <span className="max-w-[300px] font-hind-siliguri font-semibold lg:text-[24px] text-base leading-[30px] tracking-[0%]">
+                <span className="max-w-[300px] font-hind-siliguri font-semibold lg:text-[24px] text-xl leading-[30px] tracking-[0%]">
                   একটি দীর্ঘমেয়াদি রোডম্যাপ তৈরি করতে ব্যর্থ।
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <div className="min-w-max">
-                  <Icons.fillCrossOrange className="lg:size-8 size-6 rounded-[8.57px]  p-[2.86px] text-[#9FE870]" />
+                  <Icons.fillCrossOrange className="size-8 rounded-[8.57px]  p-[2.86px] text-[#9FE870]" />
                 </div>
-                <span className="max-w-[420px] font-hind-siliguri font-semibold lg:text-[24px] text-base leading-[30px] tracking-[0%]">
+                <span className="max-w-[420px] font-hind-siliguri font-semibold lg:text-[24px] text-xl leading-[30px] tracking-[0%]">
                   ধারণা ভালো হলেও বাস্তবায়নের কোনো দৃঢ় কাঠামো ছিল না।
                 </span>
               </li>

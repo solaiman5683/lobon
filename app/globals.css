@@ -145,3 +145,15 @@ input[type='number']::-webkit-inner-spin-button {
 input[type='number'] {
 	-moz-appearance: textfield;
 }
+
+.p1 {
+	@apply lg:text-xl text-base font-medium font-noto-sans leading-normal;
+}
+
+.p-card {
+	@apply font-noto-sans font-normal text-base lg:leading-[24px];
+}
+
+.leaflet-bottom.leaflet-right {
+	opacity: 0;
+}
