@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import AnimatedSVG from "./common/animated-svg";
 import { Icons } from "./icons";
 
 export default function Footer()
@@ -37,10 +36,10 @@ export default function Footer()
               <h4 className="text-[#1D3200] text-xl font-semibold leading-normal">জয়েন  করুন</h4>
 
               <div className="flex items-center gap-5 mt-3">
-                <Link href='/'>
+                <Link href='https://www.facebook.com/share/g/18qCr3b2zo/' target="_blank">
                   <Image src="/icons/fb-group.svg" width={44} height={44} alt="Facebook" />
                 </Link>
-                <Link href='/'>
+                <Link href='https://discord.gg/6bWH7sY2' target="_blank">
                   <Image src="/icons/discord.svg" width={44} height={44} alt="discord" />
                 </Link>
               </div>
@@ -49,15 +48,15 @@ export default function Footer()
               <h4 className="text-[#1D3200] text-xl font-semibold leading-normal">ফলো করুন</h4>
 
               <div className="flex items-center gap-5 mt-3">
-                <Link href='/'>
+                <Link href='https://www.facebook.com/people/Lobon/61572394924176/' target="_blank">
                   <Image src="/icons/facebook.svg" width={44} height={44} alt="Facebook" />
                 </Link>
-                <Link href='/'>
+                {/* <Link href='/'>
                   <Image src="/icons/twitter.svg" width={44} height={44} alt="twitter" />
                 </Link>
                 <Link href='/'>
                   <Image src="/icons/linkedin.svg" width={44} height={44} alt="linkedin" />
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
