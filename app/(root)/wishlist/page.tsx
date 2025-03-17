@@ -64,7 +64,7 @@ export default function PlatformPage()
                 </div>
 
                 <div className="flex justify-center">
-                    <Map />
+                    <Map records={records} />
                 </div>
             </div>
             <JoinForm />

@@ -197,7 +197,7 @@ export default function JoinForm()
                                                 className="flex items-center gap-2"
                                             >
                                                 <div className="flex items-center gap-2">
-                                                    <span className="min-w-max">{district.name}</span>
+                                                    <span className="min-w-max text-lg">{district.bn}</span>
                                                 </div>
                                             </SelectItem>
                                         ))}
