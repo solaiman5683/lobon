@@ -55,8 +55,7 @@ export default function Features()
                         কেন এটিকে ওপেন-সোর্স বলা হচ্ছে?
                     </h2>
                     <p className="p1 text-center text-white mb-[70px] mx-auto">
-                        সবার জন্য সমান সুযোগ তৈরি করা, যোগাযে কাজে, অবদান, এবং সফটয়্যার
-                        সমাধানের দক্ষতা হয়ে ওঠে নেতৃত্বের একমাত্র মানদণ্ড।
+                        সবার জন্য সমান সুযোগ তৈরি করা, যেখানে কাজ, অবদান, এবং সমস্যার সমাধানের দক্ষতা হয়ে ওঠে নেতৃত্বের একমাত্র মানদণ্ড।
                     </p>
                 </div>
 
@@ -76,7 +75,7 @@ export default function Features()
                                     <h4 className="text-center justify-start text-[#1D3200] text-2xl font-semibold leading-loose">
                                         {item.title}
                                     </h4>
-                                    
+
                                     <p className="p-card text-center text-[#1D3200]">
                                         {item.description}
                                     </p>
