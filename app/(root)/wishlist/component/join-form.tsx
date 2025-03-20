@@ -15,18 +15,99 @@ const occupations = [
         name: 'ইঞ্জিনিয়ার',
     },
     {
-        slug: 'Scientist ',
-        name: 'সাইনন্টিস্ট',
+        slug: 'Scientist',
+        name: 'সাইনটিস্ট',
     },
     {
-        slug: 'Entrepreneur ',
+        slug: 'Entrepreneur',
         name: 'এন্টারপ্রেনার',
     },
     {
+        slug: 'Student',
+        name: 'শিক্ষার্থী',
+    },
+    {
+        slug: 'Teacher_Researcher',
+        name: 'শিক্ষক/গবেষক',
+    },
+    {
+        slug: 'Political_Analyst',
+        name: 'রাজনীতি বিশ্লেষক',
+    },
+    {
+        slug: 'Political_Activist',
+        name: 'রাজনৈতিক সংগঠক',
+    },
+    {
+        slug: 'Lawyer_Legal',
+        name: 'আইনজীবী/আইনপেশার সাথে যুক্ত',
+    },
+    {
+        slug: 'Doctor_Healthcare',
+        name: 'চিকিৎসক/চিকিৎসা সেবার সাথে যুক্ত',
+    },
+    {
+        slug: 'Policy_Maker',
+        name: 'পলিসি প্রণেতা',
+    },
+    {
+        slug: 'Laborer',
+        name: 'শ্রমজীবী',
+    },
+    {
+        slug: 'NGO_Worker',
+        name: 'এনজিও কর্মী',
+    },
+    {
+        slug: 'Businessperson',
+        name: 'ব্যবসায়ী',
+    },
+    {
+        slug: 'Religious_Leader',
+        name: 'ধর্মীয় নেতা',
+    },
+    {
+        slug: 'Expatriate',
+        name: 'প্রবাসী',
+    },
+    {
+        slug: 'Activist',
+        name: 'এ্যাক্টিভিস্ট',
+    },
+    {
+        slug: 'Farmer_Agriculture',
+        name: 'কৃষক/কৃষিপেশার সাথে যুক্ত',
+    },
+    {
+        slug: 'Writer',
+        name: 'লেখক',
+    },
+    {
+        slug: 'Artist',
+        name: 'শিল্পী',
+    },
+    {
+        slug: 'Govt_Employee',
+        name: 'সরকারি চাকুরিজীবী',
+    },
+    {
+        slug: 'Banker',
+        name: 'ব্যাংকার',
+    },
+    {
+        slug: 'Journalist_Media',
+        name: 'গণমাধ্যম কর্মী',
+    },
+    {
+        slug: 'Athlete',
+        name: 'ক্রীড়াবিদ',
+    },
+    {
         slug: 'Other',
-        name: 'অন্য পেশা',
+        name: 'অন্যান্য',
     }
-]
+];
+
 
 const activityTypes = [
     {
@@ -83,6 +164,7 @@ export default function JoinForm()
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const QueryClient = useQueryClient();
+    const [showAllOccupations, setShowAllOccupations] = useState(false);
 
     const handleSubmit = async (e: any) =>
     {
@@ -210,9 +292,19 @@ export default function JoinForm()
                         <label className="lg:text-[22px] text-lg font-medium leading-[33px]">
                             আপনার পেশা?
                         </label>
-                        <div className="flex flex-wrap gap-8">
+                        <div className="flex flex-wrap gap-4">
                             {
-                                occupations.map((occupation) => (
+                                showAllOccupations ? occupations.map((occupation) => (
+                                    <div
+                                        key={occupation.slug}
+                                        onClick={() => setFormValues({ ...formValues, Occupassion: occupation.slug })}
+                                        className={`flex items-center space-x-2 cursor-pointer ${formValues.Occupassion === occupation.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
+                                        <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
+                                            <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.Occupassion === occupation.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
+                                        </div>
+                                        <span className="justify-start text-base font-semibold leading-normal">{occupation.name}</span>
+                                    </div>
+                                )) : occupations.slice(0, 3).map((occupation) => (
                                     <div
                                         key={occupation.slug}
                                         onClick={() => setFormValues({ ...formValues, Occupassion: occupation.slug })}
@@ -224,6 +316,12 @@ export default function JoinForm()
                                     </div>
                                 ))
                             }
+
+                            <button onClick={() => setShowAllOccupations(!showAllOccupations)} className="text-lime-300 text-base font-medium leading-normal">
+                                {
+                                    showAllOccupations ? 'View Less' : 'View All'
+                                }
+                            </button>
                         </div>
                     </div>
 
