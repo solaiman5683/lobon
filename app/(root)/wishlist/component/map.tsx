@@ -40,7 +40,7 @@ export default function Map({ records }: { records: any })
         if (records) {
             setIsLoading(true);
             const newRecords: any[] = [];
-            const data = records.list.forEach((record: any) =>
+            records.list.forEach((record: any) =>
             {
                 const district = DISTRICT.find((d) => d.name === record.District);
                 if (!district) return;
@@ -77,8 +77,10 @@ export default function Map({ records }: { records: any })
         { lat: 24.9471, lon: 90.4203, count: 210 }, // Mymensingh
     ];
 
-    if (locationData.length === 0 && !isLoading) {
-        return <div>Loading...</div>;
+    if (isLoading) {
+        return <div className='h-[400px] flex justify-center items-center'>
+            <span className='animate-spin size-6 border-2 border-t-transparent rounded-full' />
+        </div>;
     }
 
     return (
