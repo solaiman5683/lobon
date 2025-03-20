@@ -16,7 +16,7 @@ async function getFromNocoDB()
             "Content-Type": "application/json",
         },
         params: {
-            // fields: "Id,Name,Country,District,CreatedAt",
+            fields: "Id,Name,Country,District,CreatedAt",
             offset: 0,
             limit: 1,
         },

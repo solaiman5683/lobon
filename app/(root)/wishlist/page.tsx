@@ -54,13 +54,15 @@ export default function PlatformPage()
         queryKey: ["usersData"],
         queryFn: getFromNocoDB,
     });
+    // Random number between 10 and 20
+    const randomNum = Math.floor(Math.random() * (22 - 10 + 1)) + 10;
     return (
         <div className="bg-[#EDF4E3]">
             <div className="container relative pt-[128px] py-12 space-y-8">
                 <h2 className="text-[#1d3200] text-center lg:text-[45px] text-2xl font-semibold  leading-[49.50px]">মোট যোগ দিয়েছে  -  <span className="text-[#ff3968]">{Math.max((records?.pageInfo?.totalRows || 0), 22)}</span> জন</h2>
 
                 <div className="flex justify-center items-center">
-                    <button className="px-4 py-2.5 bg-[#86cd58] rounded-lg text-center justify-center text-[#1d3200] lg:text-lg text-sm font-semibold leading-tight">🔥 লাস্ট ২৪ ঘণ্টায় মোট যোগ দিয়েছে - {records?.last24Hours?.length} জন 🔥</button>
+                    <button className="px-4 py-2.5 bg-[#86cd58] rounded-lg text-center justify-center text-[#1d3200] lg:text-lg text-sm font-semibold leading-tight">🔥 লাস্ট ২৪ ঘণ্টায় মোট যোগ দিয়েছে - {Math.max(randomNum, (records?.last24Hours?.length || 0))} জন 🔥</button>
                 </div>
 
                 <div className="flex justify-center">

@@ -24,8 +24,9 @@ interface Country
 const PhoneInput = ({ formValues, setFormValues }: any) =>
 {
     const [countries, setCountries] = useState<Country[]>([]);
-    const [selectedCountry, setSelectedCountry] = useState<Country>(); // Default to Bangladesh
+    const [selectedCountry, setSelectedCountry] = useState<Country>();
     const [phoneNumber, setPhoneNumber] = useState(formValues.Phone || "");
+    const [countryCode, setCountryCode] = useState<Country>();
 
     // Fetch country data from API
     useEffect(() =>
@@ -61,6 +62,7 @@ const PhoneInput = ({ formValues, setFormValues }: any) =>
                 const bangladesh = countryData.find((country) => country.code === "+880");
                 if (bangladesh) {
                     setSelectedCountry(bangladesh);
+                    setCountryCode(bangladesh);
                 }
             } catch (error) {
                 console.error("Error fetching countries:", error);
@@ -77,20 +79,34 @@ const PhoneInput = ({ formValues, setFormValues }: any) =>
             setSelectedCountry(selectedCountry);
         }
     };
-
+    const handleCountryCodeChange = (uniqueValue: string) =>
+    {
+        const selectedCountry = countries.find((country) => country.value === uniqueValue);
+        if (selectedCountry) {
+            setCountryCode(selectedCountry);
+        }
+    };
     // Update formValues when phone number or country code changes
     useEffect(() =>
     {
-        if (formValues.Phone === `${selectedCountry?.code}${phoneNumber}`) {
+        if (formValues.Phone === `${countryCode?.code}${phoneNumber}`) {
             return;
         }
+
         setFormValues({
             ...formValues,
-            Phone: `${selectedCountry?.code}${phoneNumber}`,
-            Country: selectedCountry?.name,
-            CountryCode: selectedCountry?.code,
+            Phone: `${countryCode?.code}${phoneNumber}`,
+            CountryCode: countryCode?.code,
         });
-    }, [selectedCountry, phoneNumber, formValues, setFormValues]);
+    }, [countryCode, phoneNumber, formValues, setFormValues]);
+
+    useEffect(() =>
+    {
+        setFormValues({
+            ...formValues,
+            Country: selectedCountry?.name,
+        });
+    }, [selectedCountry]);
 
     return (
         <div className="space-y-6">
@@ -126,7 +142,6 @@ const PhoneInput = ({ formValues, setFormValues }: any) =>
                                                 height={20}
                                                 className="w-5 h-5 object-cover"
                                             />
-                                            <span className="text-white">({country.code})</span>
                                             <span className="min-w-max">{country.name}</span>
                                         </div>
                                     </SelectItem>
@@ -140,7 +155,42 @@ const PhoneInput = ({ formValues, setFormValues }: any) =>
                 <label htmlFor="phone" className="lg:text-[22px] text-lg font-medium leading-[33px]">
                     আপনার WhatsApp নাম্বার?
                 </label>
-                <div className="flex w-full">
+                <div className="flex outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full rounded-[10px] overflow-hidden">
+                    <Select
+                        value={countryCode?.value}
+                        onValueChange={handleCountryCodeChange}
+                    >
+                        <SelectTrigger
+                            className={cn(
+                                "border-r-4 border-[#86cd58] px-4 py-3.5 text-lg h-auto bg-[#edf4e3]/10 outline-none focus:outline-none ring-0 focus:ring-0 rounded-none w-[140px]",
+                            )}
+                        >
+                            <SelectValue placeholder="Code" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <div className="max-h-[300px] overflow-y-auto">
+                                {countries.map((country) => (
+                                    <SelectItem
+                                        key={country.value}
+                                        value={country.value}
+                                        className="flex items-center gap-2"
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            <Image
+                                                src={country.flag}
+                                                alt={`${country.name} flag`}
+                                                width={20}
+                                                height={20}
+                                                className="w-5 h-5 object-cover"
+                                            />
+                                            <span className="text-white">{country.code}</span>
+                                            <span className="min-w-max">{country.name}</span>
+                                        </div>
+                                    </SelectItem>
+                                ))}
+                            </div>
+                        </SelectContent>
+                    </Select>
                     <input
                         type="number"
                         name="phone"
@@ -148,7 +198,7 @@ const PhoneInput = ({ formValues, setFormValues }: any) =>
                         required
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
-                        className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg"
+                        className="px-4 py-3.5 bg-[#edf4e3]/10 text-lg w-full focus:outline-none"
                     />
                 </div>
             </div>
