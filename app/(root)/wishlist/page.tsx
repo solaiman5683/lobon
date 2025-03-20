@@ -5,6 +5,7 @@ import moment from "moment";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import JoinForm from "./component/join-form";
 
 const Map = dynamic(() => import("./component/map"), { ssr: false });
@@ -15,9 +16,9 @@ async function getFromNocoDB()
 
     const options = {
         method: "GET",
-        url: "https://crm.lobon.org/api/v2/tables/mezkublc4xdsf3h/records",
+        url: "https://crm.lobon.org/api/v2/tables/mjmif4s4w6tfsa4/records",
         headers: {
-            "xc-token": "rLTPoRJbaJCawC-KdapuQj42liIhINFJLC5BgFVT",
+            "xc-token": "OqSFdSdpMOKDO1FoeNkL5ULv_POw6CTZw2PbmqM-",
             "Content-Type": "application/json",
         },
         params: {
@@ -48,14 +49,16 @@ async function getFromNocoDB()
     }
 }
 
+
 export default function PlatformPage()
 {
     const { data: records, error, isLoading } = useQuery({
         queryKey: ["usersData"],
         queryFn: getFromNocoDB,
     });
-    // Random number between 10 and 20
-    const randomNum = Math.floor(Math.random() * (22 - 10 + 1)) + 10;
+    const [randomNum, setRandomNum] = useState(Math.floor(Math.random() * (20 - 10 + 1)) + 10);
+
+    
     return (
         <div className="bg-[#EDF4E3]">
             <div className="container relative pt-[128px] py-12 space-y-8">

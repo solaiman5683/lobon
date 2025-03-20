@@ -10,9 +10,9 @@ async function getFromNocoDB()
 
     const options = {
         method: "GET",
-        url: "https://crm.lobon.org/api/v2/tables/mezkublc4xdsf3h/records",
+        url: "https://crm.lobon.org/api/v2/tables/mjmif4s4w6tfsa4/records",
         headers: {
-            "xc-token": "rLTPoRJbaJCawC-KdapuQj42liIhINFJLC5BgFVT",
+            "xc-token": "OqSFdSdpMOKDO1FoeNkL5ULv_POw6CTZw2PbmqM-",
             "Content-Type": "application/json",
         },
         params: {
