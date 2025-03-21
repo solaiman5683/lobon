@@ -24,7 +24,6 @@ interface Country
 const PhoneInput = ({ formValues, setFormValues }: any) =>
 {
     const [countries, setCountries] = useState<Country[]>([]);
-    const [selectedCountry, setSelectedCountry] = useState<Country>();
     const [phoneNumber, setPhoneNumber] = useState(formValues.Phone || "");
     const [countryCode, setCountryCode] = useState<Country>();
 
@@ -61,7 +60,6 @@ const PhoneInput = ({ formValues, setFormValues }: any) =>
 
                 const bangladesh = countryData.find((country) => country.code === "+880");
                 if (bangladesh) {
-                    setSelectedCountry(bangladesh);
                     setCountryCode(bangladesh);
                 }
             } catch (error) {
@@ -71,14 +69,6 @@ const PhoneInput = ({ formValues, setFormValues }: any) =>
         fetchCountries();
     }, []);
 
-    // Handle selection change
-    const handleCountryChange = (uniqueValue: string) =>
-    {
-        const selectedCountry = countries.find((country) => country.value === uniqueValue);
-        if (selectedCountry) {
-            setSelectedCountry(selectedCountry);
-        }
-    };
     const handleCountryCodeChange = (uniqueValue: string) =>
     {
         const selectedCountry = countries.find((country) => country.value === uniqueValue);
@@ -97,60 +87,12 @@ const PhoneInput = ({ formValues, setFormValues }: any) =>
             ...formValues,
             Phone: `${countryCode?.code}${phoneNumber}`,
             CountryCode: countryCode?.code,
+            Country: countryCode?.name,
         });
     }, [countryCode, phoneNumber, formValues, setFormValues]);
 
-    useEffect(() =>
-    {
-        setFormValues({
-            ...formValues,
-            Country: selectedCountry?.name,
-        });
-    }, [selectedCountry]);
-
     return (
         <div className="space-y-6">
-            <div className="space-y-2">
-                <label htmlFor="phone" className="lg:text-[22px] text-lg font-medium leading-[33px]">
-                    আপনার দেশ নির্বাচন করুন
-                </label>
-                <div className="w-full">
-                    <Select
-                        value={selectedCountry?.value}
-                        onValueChange={handleCountryChange}
-                    >
-                        <SelectTrigger
-                            className={cn(
-                                "rounded-[10px] px-4 py-3.5 text-lg h-auto bg-[#edf4e3]/10 outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 focus:outline-[#86cd58] ring-0 focus:ring-0",
-                            )}
-                        >
-                            <SelectValue placeholder="Select Country" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <div className="max-h-[300px] overflow-y-auto">
-                                {countries.map((country) => (
-                                    <SelectItem
-                                        key={country.value}
-                                        value={country.value}
-                                        className="flex items-center gap-2"
-                                    >
-                                        <div className="flex items-center gap-2">
-                                            <Image
-                                                src={country.flag}
-                                                alt={`${country.name} flag`}
-                                                width={20}
-                                                height={20}
-                                                className="w-5 h-5 object-cover"
-                                            />
-                                            <span className="min-w-max">{country.name}</span>
-                                        </div>
-                                    </SelectItem>
-                                ))}
-                            </div>
-                        </SelectContent>
-                    </Select>
-                </div>
-            </div>
             <div className="space-y-2">
                 <label htmlFor="phone" className="lg:text-[22px] text-lg font-medium leading-[33px]">
                     আপনার WhatsApp নাম্বার?
