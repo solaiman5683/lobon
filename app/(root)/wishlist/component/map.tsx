@@ -59,7 +59,7 @@ export default function Map({ records }: { records: any })
                     newRecords[index].count += 1;
                 }
             });
-            console.log(newRecords);
+            // console.log(newRecords);
             setLocationData(newRecords);
             setIsLoading(false);
         }

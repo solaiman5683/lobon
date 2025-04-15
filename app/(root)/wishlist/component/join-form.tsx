@@ -7,6 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "sonner";
+import { NidUploader } from "./nid-uploader";
 import PhoneInput from "./phoneInput";
 
 const occupations = [
@@ -120,18 +121,57 @@ const activityTypes = [
     }
 ]
 
-// Function to post data to NocoDB table
-async function postToNocoDB(inputData: any)
+async function postToNocoDB(inputData: any, nidFile: File | null)
 {
+    // Handle file upload if a file is provided
+    if (nidFile) {
+        const formData = new FormData();
+        formData.append('file', nidFile);
 
+        try {
+            // Upload the file to NocoDB's storage endpoint
+            const fileUploadResponse = await axios.post(
+                'https://crm.lobon.org/api/v2/storage/upload',
+                formData,
+                {
+                    headers: {
+                        'xc-token': 'OqSFdSdpMOKDO1FoeNkL5ULv_POw6CTZw2PbmqM-',
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    // Optional: Organize files in a specific folder
+                    params: { path: 'nid_attachments' }, // Customize as needed
+                }
+            );
+
+            // The response should be an array of objects (e.g., [{ url: "file_url", ... }])
+            const attachmentData = fileUploadResponse.data;
+
+            // Validate the response format
+            if (!attachmentData) {
+                console.error('Invalid file upload response:', attachmentData);
+                throw new Error('Failed to process attachment upload: Invalid response format');
+            }
+
+            // Assign the attachment data to the NID field
+            inputData.NID = attachmentData; // NocoDB expects the full array
+        } catch (error: any) {
+            console.error(
+                'Error uploading file to NocoDB:',
+                error.response ? error.response.data : error.message
+            );
+            throw new Error('File upload failed: ' + (error.response?.data?.message || error.message));
+        }
+    }
+
+    // Post the record data
     const options = {
-        method: "POST",
-        url: "https://crm.lobon.org/api/v2/tables/mjmif4s4w6tfsa4/records",
+        method: 'POST',
+        url: 'https://crm.lobon.org/api/v2/tables/mjmif4s4w6tfsa4/records',
         headers: {
-            "xc-token": "OqSFdSdpMOKDO1FoeNkL5ULv_POw6CTZw2PbmqM-",
-            "Content-Type": "application/json"
+            'xc-token': 'OqSFdSdpMOKDO1FoeNkL5ULv_POw6CTZw2PbmqM-',
+            'Content-Type': 'application/json',
         },
-        data: inputData
+        data: inputData,
     };
 
     try {
@@ -139,10 +179,10 @@ async function postToNocoDB(inputData: any)
         return response.data;
     } catch (error: any) {
         console.error(
-            "Error posting to NocoDB:",
+            'Error posting to NocoDB:',
             error.response ? error.response.data : error.message
         );
-        throw error;
+        throw new Error('Record creation failed: ' + (error.response?.data?.message || error.message));
     }
 }
 
@@ -161,7 +201,9 @@ export default function JoinForm()
         Contribution: '',
         Country: '',
         CountryCode: '',
+        Status: 'Pending',
     });
+    const [nid, setNid] = useState<File[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const QueryClient = useQueryClient();
     const [showAllOccupations, setShowAllOccupations] = useState(false);
@@ -170,10 +212,9 @@ export default function JoinForm()
     {
         e.preventDefault();
         setIsSubmitting(true);
-        console.log(formValues);
         // send form data to server
         try {
-            await postToNocoDB(formValues);
+            await postToNocoDB(formValues, nid[0]);
             toast.success('আপনার তথ্য সফলভাবে সাবমিট করা হয়েছে');
 
             // Reset form values
@@ -187,6 +228,7 @@ export default function JoinForm()
                 About: '',
                 Contribution: '',
             });
+            setNid([]);
             QueryClient.invalidateQueries({ queryKey: ['usersData'] });
         } catch (error) {
             console.log(error);
@@ -348,6 +390,12 @@ export default function JoinForm()
                             onChange={(e) => setFormValues({ ...formValues, Contribution: e.target.value })}
                             value={formValues.Contribution}
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
+                    </div>
+                    <div className="space-y-2">
+                        <label htmlFor="contributionMessage" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                            আপনার NID  এটাচ  করুন।
+                        </label>
+                        <NidUploader files={nid} setFiles={setNid} />
                     </div>
 
                     <button type="submit" className="px-5 py-3 bg-[#c7ff7d] rounded-[10px]">
