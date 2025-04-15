@@ -7,29 +7,12 @@ import Link from "next/link";
 
 async function getFromNocoDB()
 {
-
-    const options = {
-        method: "GET",
-        url: "https://crm.lobon.org/api/v2/tables/mjmif4s4w6tfsa4/records",
-        headers: {
-            "xc-token": "OqSFdSdpMOKDO1FoeNkL5ULv_POw6CTZw2PbmqM-",
-            "Content-Type": "application/json",
-        },
-        params: {
-            fields: "Id,Name,Country,District,CreatedAt",
-            offset: 0,
-            limit: 1,
-        },
-    };
-
     try {
-        const response = await axios.request(options);
-        return {
-            ...response.data,
-        };
+        const response = await axios.get('/api/get-records'); // Call the Next.js API route
+        return response.data;
     } catch (error: any) {
         console.error(
-            "Error fetching from NocoDB:",
+            'Error fetching from custom endpoint:',
             error?.response ? error?.response?.data : error?.message
         );
         throw error;

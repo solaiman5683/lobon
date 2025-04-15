@@ -65,18 +65,6 @@ export default function Map({ records }: { records: any })
         }
     }, [records]);
 
-    // Example user locations
-    const userLocations = [
-        { lat: 23.8103, lon: 90.2125, count: 250 }, // Dhaka
-        { lat: 24.8998, lon: 91.8710, count: 180 }, // Sylhet
-        { lat: 22.7010, lon: 90.3535, count: 220 }, // Barisal
-        { lat: 22.3350, lon: 92.1325, count: 275 }, // Chittagong (Corrected)
-        { lat: 24.7636, lon: 89.0241, count: 195 }, // Rajshahi (Corrected)
-        { lat: 22.8456, lon: 89.3403, count: 230 }, // Khulna
-        { lat: 25.7439, lon: 89.2752, count: 160 }, // Rangpur
-        { lat: 24.9471, lon: 90.4203, count: 210 }, // Mymensingh
-    ];
-
     if (isLoading) {
         return <div className='h-[400px] flex justify-center items-center'>
             <span className='animate-spin size-6 border-2 border-t-transparent rounded-full' />

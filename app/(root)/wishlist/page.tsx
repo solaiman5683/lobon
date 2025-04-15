@@ -1,48 +1,22 @@
 'use client';
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import moment from "moment";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import JoinForm from "./component/join-form";
 
 const Map = dynamic(() => import("./component/map"), { ssr: false });
 
-// Fetch function with specific fields
 async function getFromNocoDB()
 {
-
-    const options = {
-        method: "GET",
-        url: "https://crm.lobon.org/api/v2/tables/mjmif4s4w6tfsa4/records",
-        headers: {
-            "xc-token": "OqSFdSdpMOKDO1FoeNkL5ULv_POw6CTZw2PbmqM-",
-            "Content-Type": "application/json",
-        },
-        params: {
-            // fields: "Id,Name,Country,District,CreatedAt",
-            offset: 0,
-            limit: 1000,
-            sort: "-CreatedAt",
-        },
-    };
-
     try {
-        const response = await axios.request(options);
-        const oneDayAgo = moment().subtract(24, 'hours');
-        const recentEntries = response.data.list.filter((item: any) =>
-        {
-            return moment(item.CreatedAt).isAfter(oneDayAgo);
-        });
-        return {
-            ...response.data,
-            last24Hours: recentEntries,
-        };
+        const response = await axios.get('/api/get-records'); // Call the Next.js API route
+        return response.data;
     } catch (error: any) {
         console.error(
-            "Error fetching from NocoDB:",
+            'Error fetching from custom endpoint:',
             error?.response ? error?.response?.data : error?.message
         );
         throw error;
@@ -58,7 +32,7 @@ export default function PlatformPage()
     });
     const [randomNum, setRandomNum] = useState(Math.floor(Math.random() * (20 - 10 + 1)) + 10);
 
-    
+
     return (
         <div className="bg-[#EDF4E3]">
             <div className="container relative pt-[128px] py-12 space-y-8">
