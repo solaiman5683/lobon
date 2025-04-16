@@ -313,8 +313,16 @@ export default function JoinForm()
         }
     }, [signature]);
 
+    useEffect(() =>
+    {
+        const formHeader = document.getElementById('form-header');
+        if (formHeader) {
+            formHeader.scrollIntoView({ behavior: 'auto' });
+        }
+    }, [step]);
+
     return (
-        <div className="bg-[#0A221F] lg:py-32 py-8 px-4 lg:px-0 space-y-6">
+        <div id="form-header" className="bg-[#0A221F] lg:py-32 py-8 px-4 lg:px-0 space-y-6">
             {
                 step < 3 && (
                     <div className="flex gap-8 lg:flex-row flex-col justify-center w-full">
