@@ -20,12 +20,12 @@ export default function OurGovernance()
 
           <div className="flex-1 flex flex-col justify-between space-y-3 w-[300px] md:w-full mx-auto">
             <div className="bg-[#434C39] rounded-xl p-8 flex flex-col items-center w-full">
-              <Image src="/icons/election-credit.png" width={48} height={48} alt="Our Governance" />
+              <Image src="/icons/donate-credit.png" width={48} height={48} alt="Our Governance" />
               <h4 className="text-center justify-start text-white text-2xl font-semibold leading-loose">Donate Credit</h4>
               <p className="max-w-72 text-center justify-start text-white text-base font-medium leading-normal">প্রতিটি মেম্বার তাদের ব্যালেন্সে প্রতি মাসে ৭৫ করে ডিসি পাবে, যা তারা  অন্য মেম্বারদের কার্যকলাপের উপর ভিত্তি করে প্ল্যাটফর্মের ডোনেট করতে পারবে।</p>
             </div>
             <div className="bg-[#434C39] rounded-xl p-8 flex flex-col items-center w-full">
-              <Image src="/icons/donate-credit.png" width={48} height={48} alt="Our Governance" />
+              <Image src="/icons/election-credit.png" width={48} height={48} alt="Our Governance" />
               <h4 className="text-center justify-start text-white text-2xl font-semibold leading-loose">Election Credit</h4>
               <p className="max-w-72 text-center justify-start text-white text-base font-medium leading-normal">প্রতিটি মেম্বার তাদের প্ল্যাটফর্ম কন্ট্রিবিউশনের মাধ্যমে অন্য মেম্বারের থেকে EC আর্ন করতে পারবে। এই নাম্বারটি প্লাটফর্ম ইলেকশনের টার্ম এর পর রিসেট হয়ে যাবে।</p>
             </div>
