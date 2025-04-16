@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function OurPlatform()
 {
@@ -16,9 +17,11 @@ export default function OurPlatform()
                     <br />
                     এটি হবে এমন একটি প্ল্যাটফর্ম, যা একত্রিত করে রাজনীতি, ব্যবসা, ইনোভেশন এবং গ্লোবাল ট্রেন্ডের মতো গুরুত্বপূর্ণ বিষয়গুলো, এবং আমাদের সদস্যদের জন্য একটি গঠনমূলক ও ফলপ্রসূ অভিজ্ঞতা নিশ্চিত করবে।
                 </p>
-                <Button className="bg-[#bef264] hover:bg-[#bef264] text-black lg:text-lg font-semibold leading-normal rounded-full px-8 py-3 h-auto">
-                    বিস্তারিত জানুন
-                </Button>
+                <Link href="/platform" className="block">
+                    <Button className="bg-[#bef264] hover:bg-[#bef264] text-black lg:text-lg font-semibold leading-normal rounded-full px-8 py-3 h-auto">
+                        বিস্তারিত জানুন
+                    </Button>
+                </Link>
 
                 <Image src="/images/platform.png" width={1920} height={1080} alt="Our Platform" priority className="h-auto w-full pt-8" />
             </div>

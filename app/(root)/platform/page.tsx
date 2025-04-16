@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Hero from "./_components/hero";
 import { JoinUs } from "./_components/join-us";
 import Platforms from "./_components/platforms";
@@ -57,6 +58,11 @@ export default function PlatformPage()
                     <Image src="/images/member-profiling.png" alt="Member Profiling" width={1920} height={1080} className="w-full h-auto" />
                 </div>
                 <JoinUs />
+                <div className="flex justify-center mt-6">
+                    <Link href='/developer-hub' className="px-5 py-3 rounded-[120px] outline outline-2 outline-offset-[-2px] outline-[#1D3200] hover:bg-[#1D3200] text-[#1D3200] hover:text-white transition-all duration-300 ease-in-out text-lg font-semibold font-sl leading-normal">
+                        ডেভেলপার-হাব সম্পর্কে জানুন
+                    </Link>
+                </div>
             </div>
         </div>
     )

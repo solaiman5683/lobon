@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function OurGovernance()
 {
@@ -43,9 +44,11 @@ export default function OurGovernance()
           এই সিস্টেমের উপর ভিত্তি করে সাধারণ মেম্বাররা আমাদের ইন্টারনাল পার্টির হায়ারার্কি পজিশনগুলোতে নির্বাচনে অংশগ্রহণ করতে পারবে।
         </p>
 
-        <Button className="bg-[#86cd58] hover:bg-[#88d157] text-black lg:text-lg font-semibold leading-normal rounded-full px-8 py-3 h-auto">
-          বিস্তারিত জানুন
-        </Button>
+        <Link href="/governance" className="block">
+          <Button className="bg-[#86cd58] hover:bg-[#88d157] text-black lg:text-lg font-semibold leading-normal rounded-full px-8 py-3 h-auto">
+            বিস্তারিত জানুন
+          </Button>
+        </Link>
       </div>
     </div>
   )
