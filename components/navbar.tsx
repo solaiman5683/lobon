@@ -1,5 +1,6 @@
 "use client";
 
+import { NAVIGATION } from "@/config";
 import { cn } from "@/lib/utils";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import Link from "next/link";
@@ -62,19 +63,19 @@ export default function Navbar()
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <Icons.logo className="h-auto w-12" />
           </Link>
-          {/* <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
+          <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
             {NAVIGATION.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-[#1D3200] text-[18px] font-semibold"
+                  "text-[#1D3200] text-[18px] font-semibold relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-[#1D3200] after:scale-x-0 hover:after:scale-x-100 after:transition-all transition-all after:duration-300 after:ease-in-out duration-300 ease-in-out",
                 )}
               >
                 {item.title}
               </Link>
             ))}
-          </div> */}
+          </div>
           <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
             <div className="flex gap-1">
               <Link href="/wishlist">

@@ -4,10 +4,6 @@ export const NAVIGATION = [
     href: "/",
   },
   {
-    title: "ভিসন-মিশন",
-    href: "/vision-mission",
-  },
-  {
     title: "প্লাটফর্ম",
     href: "/platform",
   },
@@ -16,10 +12,13 @@ export const NAVIGATION = [
     href: "/govournance",
   },
   {
-    title: "প্রোফাইল",
-    href: "/profile",
+    title: "রোডম্যাপ",
+    href: "/#roadmap",
   },
-  //contact is included in the navigation by contact-form.tsx
+  {
+    title: "ডেভেলপার-হাব",
+    href: "/developer-hub",
+  },
 ];
 
 export const FOOTER_PAGES = [

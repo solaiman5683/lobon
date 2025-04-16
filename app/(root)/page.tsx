@@ -53,7 +53,9 @@ export default function Home()
       <OurGovernance />
       <OurPlatform />
       <NextGen />
-      <OurRoadmap />
+      <div id="roadmap">
+        <OurRoadmap />
+      </div>
     </div>
   );
 }
