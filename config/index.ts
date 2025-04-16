@@ -9,7 +9,7 @@ export const NAVIGATION = [
   },
   {
     title: "গভর্নেন্স",
-    href: "/govournance",
+    href: "/governance",
   },
   {
     title: "রোডম্যাপ",
