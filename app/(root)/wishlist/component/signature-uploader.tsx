@@ -16,14 +16,14 @@ import Image from "next/image";
 import * as React from "react";
 import { toast } from "sonner";
 
-export function NidUploader({ files, setFiles }: { files: File[]; setFiles: (files: File[]) => void })
+export function SignatureUploader({ files, setFiles }: { files: File[]; setFiles: (files: File[]) => void })
 {
 
     const onFileValidate = React.useCallback(
         (file: File): string | null =>
         {
             // Validate file type (only images)
-            if (!file.type.startsWith("image/") && file.type !== "application/pdf") {
+            if (!file.type.startsWith("image/")) {
                 return "Only image files (JPG, PNG) and PDF files are allowed";
             }
 
@@ -51,18 +51,18 @@ export function NidUploader({ files, setFiles }: { files: File[]; setFiles: (fil
             onValueChange={setFiles}
             onFileValidate={onFileValidate}
             onFileReject={onFileReject}
-            accept="image/*, application/pdf"
+            accept="image/*"
             maxFiles={1}
             className="w-full bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 text-lg group"
         >
             <FileUploadDropzone>
                 <div className="flex flex-col items-center gap-3">
-                    <Image src="/icons/attach_file.svg" alt="Attach Icon" width={42} height={42} />
+                    <Image src="/icons/signature.svg" alt="Attach Icon" width={42} height={42} />
                     <p className="font-medium text-sm">
-                        ফাইল আপলোড অথবা সংযুক্ত করুন।
+                        স্বাক্ষর যুক্ত করুন।
                     </p>
                     <p className="text-gray-200 text-xs">
-                        সমর্থিত ফরম্যাট: JPG, PNG, PDF (সর্বোচ্চ ফাইল সাইজ: ২MB)
+                        সমর্থিত ফরম্যাট: JPG, PNG (সর্বোচ্চ ফাইল সাইজ: ২MB)
                     </p>
                 </div>
                 {/* <FileUploadTrigger asChild>

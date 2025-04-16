@@ -5,10 +5,14 @@ import { DISTRICT } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { NidUploader } from "./nid-uploader";
 import PhoneInput from "./phoneInput";
+import SignatureForm from "./signature-form";
+import { SignatureUploader } from "./signature-uploader";
+import Stepper from "./stepper";
+import WelcomeMember from "./welcome-member";
 
 const occupations = [
     {
@@ -121,7 +125,18 @@ const activityTypes = [
     }
 ]
 
-async function postToNocoDB(inputData: any, nidFile: File | null)
+const idTypes = [
+    {
+        slug: 'NID',
+        name: 'এনআইডি',
+    },
+    {
+        slug: 'Passport',
+        name: 'পাসপোর্ট',
+    },
+]
+
+async function postToNocoDB(inputData: any, nidFile: File | null, signatureFile: File | null)
 {
     // Handle file upload if a file is provided
     if (nidFile) {
@@ -162,6 +177,44 @@ async function postToNocoDB(inputData: any, nidFile: File | null)
             throw new Error('File upload failed: ' + (error.response?.data?.message || error.message));
         }
     }
+    if (signatureFile) {
+        const formData = new FormData();
+        formData.append('file', signatureFile);
+
+        try {
+            // Upload the file to NocoDB's storage endpoint
+            const fileUploadResponse = await axios.post(
+                'https://crm.lobon.org/api/v2/storage/upload',
+                formData,
+                {
+                    headers: {
+                        'xc-token': 'OqSFdSdpMOKDO1FoeNkL5ULv_POw6CTZw2PbmqM-',
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    // Optional: Organize files in a specific folder
+                    params: { path: 'signature' }, // Customize as needed
+                }
+            );
+
+            // The response should be an array of objects (e.g., [{ url: "file_url", ... }])
+            const attachmentData = fileUploadResponse.data;
+
+            // Validate the response format
+            if (!attachmentData) {
+                console.error('Invalid file upload response:', attachmentData);
+                throw new Error('Failed to process attachment upload: Invalid response format');
+            }
+
+            // Assign the attachment data to the Signature field
+            inputData.Signature = attachmentData; // NocoDB expects the full array
+        } catch (error: any) {
+            console.error(
+                'Error uploading file to NocoDB:',
+                error.response ? error.response.data : error.message
+            );
+            throw new Error('File upload failed: ' + (error.response?.data?.message || error.message));
+        }
+    }
 
     // Post the record data
     const options = {
@@ -185,8 +238,8 @@ async function postToNocoDB(inputData: any, nidFile: File | null)
         throw new Error('Record creation failed: ' + (error.response?.data?.message || error.message));
     }
 }
-
-
+// random 8 digit number
+const memberId = Math.floor(10000000 + Math.random() * 90000000).toString();
 
 export default function JoinForm()
 {
@@ -201,12 +254,18 @@ export default function JoinForm()
         Contribution: '',
         Country: '',
         CountryCode: '',
-        Status: 'Pending',
+        idType: idTypes[0].slug,
+        MemberID: memberId,
     });
     const [nid, setNid] = useState<File[]>([]);
+    const [signature, setSignature] = useState<File[]>([]);
+    const [signatureImage, setSignatureImage] = useState<string | null>(null);
+    const [step, setStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const QueryClient = useQueryClient();
     const [showAllOccupations, setShowAllOccupations] = useState(false);
+
+    const canContinue = (!!(formValues.Name && formValues.Email && formValues.District && formValues.Occupassion && formValues.About && formValues.Activity && formValues.Phone) && step === 0) || (nid.length > 0 && step === 1) || (step === 2 && !!signature.length);
 
     const handleSubmit = async (e: any) =>
     {
@@ -214,21 +273,23 @@ export default function JoinForm()
         setIsSubmitting(true);
         // send form data to server
         try {
-            await postToNocoDB(formValues, nid[0]);
+            await postToNocoDB(formValues, nid[0], signature[0]);
             toast.success('আপনার তথ্য সফলভাবে সাবমিট করা হয়েছে');
 
             // Reset form values
             setFormValues({
                 ...formValues,
-                Name: '',
                 Activity: activityTypes[0].slug,
                 Email: '',
                 District: '',
                 Occupassion: occupations[0].slug,
                 About: '',
                 Contribution: '',
+                MemberID: Math.floor(10000000 + Math.random() * 90000000).toString(),
             });
+            setSignature([]);
             setNid([]);
+            setStep(prev => prev + 1);
             QueryClient.invalidateQueries({ queryKey: ['usersData'] });
         } catch (error) {
             console.log(error);
@@ -238,59 +299,92 @@ export default function JoinForm()
         }
     };
 
+    useEffect(() =>
+    {
+        if (signature.length > 0) {
+            const reader = new FileReader();
+            reader.onload = () =>
+            {
+                setSignatureImage(reader.result as string);
+            };
+            reader.readAsDataURL(signature[0]);
+        } else {
+            setSignatureImage(null);
+        }
+    }, [signature]);
+
     return (
-        <div className="bg-[#0A221F] lg:py-32 py-8 px-4 lg:px-0">
-            <div className="max-w-2xl mx-auto lg:space-y-6 space-y-4">
-                <h4 className="text-white lg:text-[50px] text-3xl font-medium leading-[55px]">জয়েনফর্ম</h4>
-                <div className="italic text-white/90 lg:text-[22px] text-lg font-normal font-trb lg:leading-[33px]">নোটঃ আপনি যদি BAL , সমকামী আইডলজি সমর্থক হয়ে থাকেন, <br className="lg:block hidden" /> দয়া করে সাবমিশন থেকে বিরত থাকুন।</div>
-
-                <form onSubmit={handleSubmit} className="space-y-6 text-white">
-                    <div className="space-y-2">
-                        <label htmlFor="name" className="lg:text-[22px] text-lg font-medium leading-[33px]">আপনার এনআইডি/পাসপোর্ট অনুযায়ী নাম?</label>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            required
-                            onChange={(e) => setFormValues({ ...formValues, Name: e.target.value })}
-                            value={formValues.Name}
-                            className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
-                    </div>
-                    <div className="space-y-2">
-                        <label className="lg:text-[22px] text-lg font-medium leading-[33px]">আপনার আমাদের সাথে কীভাবে অ্যাক্টিভিটিতে অংশ নিতে চান?</label>
-                        <div className="flex gap-8">
-                            {
-                                activityTypes.map((activity) => (
-                                    <div key={activity.slug} onClick={() => setFormValues({ ...formValues, Activity: activity.slug })} className={`flex items-center space-x-2 cursor-pointer ${formValues.Activity === activity.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
-                                        <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
-                                            <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.Activity === activity.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
-                                        </div>
-                                        <span className="justify-start text-base font-semibold leading-normal">{activity.name}</span>
-                                    </div>
-                                ))
-                            }
-
+        <div className="bg-[#0A221F] lg:py-32 py-8 px-4 lg:px-0 space-y-6">
+            {
+                step < 3 && (
+                    <div className="flex gap-8 lg:flex-row flex-col justify-center w-full">
+                        <div className="w-72"></div>
+                        <div className="lg:w-[576px] lg:space-y-6 space-y-4">
+                            <h4 className="text-white lg:text-[50px] text-3xl font-medium leading-[55px]">জয়েনফর্ম</h4>
+                            <div className="italic text-white/90 lg:text-[22px] text-lg font-normal font-trb lg:leading-[33px]">নোটঃ আপনি যদি BAL, সমকামী আইডলজি সমর্থক হয়ে থাকেন, <br className="lg:block hidden" /> দয়া করে সাবমিশন থেকে বিরত থাকুন।</div>
                         </div>
+                        <div className="w-72"></div>
                     </div>
-                    <PhoneInput formValues={formValues} setFormValues={setFormValues} />
-                    <div className="space-y-2">
-                        <label htmlFor="email" className="lg:text-[22px] text-lg font-medium leading-[33px]">
-                            আপনার ইমেইল?
-                        </label>
-                        <input
-                            type="email"
-                            name="email"
-                            id="email"
-                            required
-                            onChange={(e) => setFormValues({ ...formValues, Email: e.target.value })}
-                            value={formValues.Email}
-                            className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
-                    </div>
-                    <div className="space-y-2">
-                        <label htmlFor="district" className="lg:text-[22px] text-lg font-medium leading-[33px]">
-                            আপনার এনআইডি/পাসপোর্ট অনুযায়ী কোন জেলা প্রতিনিধিত্ব করেন?
-                        </label>
-                        {/* <input
+                )
+            }
+            <div className="flex gap-8 lg:flex-row flex-col justify-center w-full">
+                <div className="w-72">
+                    {
+                        step < 3 && (
+                            <Stepper step={step} />
+                        )
+                    }
+                </div>
+                <div className="lg:w-[576px] w-full lg:space-y-6 space-y-4">
+                    {
+                        step === 0 && (
+                            <form className="space-y-6 text-white">
+                                <div className="space-y-2">
+                                    <label htmlFor="name" className="lg:text-[22px] text-lg font-medium leading-[33px]">আপনার এনআইডি/পাসপোর্ট অনুযায়ী নাম?</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        id="name"
+                                        required
+                                        onChange={(e) => setFormValues({ ...formValues, Name: e.target.value })}
+                                        value={formValues.Name}
+                                        className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="lg:text-[22px] text-lg font-medium leading-[33px]">আপনার আমাদের সাথে কীভাবে অ্যাক্টিভিটিতে অংশ নিতে চান?</label>
+                                    <div className="flex gap-8">
+                                        {
+                                            activityTypes.map((activity) => (
+                                                <div key={activity.slug} onClick={() => setFormValues({ ...formValues, Activity: activity.slug })} className={`flex items-center space-x-2 cursor-pointer ${formValues.Activity === activity.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
+                                                    <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
+                                                        <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.Activity === activity.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
+                                                    </div>
+                                                    <span className="justify-start text-base font-semibold leading-normal">{activity.name}</span>
+                                                </div>
+                                            ))
+                                        }
+
+                                    </div>
+                                </div>
+                                <PhoneInput formValues={formValues} setFormValues={setFormValues} />
+                                <div className="space-y-2">
+                                    <label htmlFor="email" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                        আপনার ইমেইল?
+                                    </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        required
+                                        onChange={(e) => setFormValues({ ...formValues, Email: e.target.value })}
+                                        value={formValues.Email}
+                                        className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
+                                </div>
+                                <div className="space-y-2">
+                                    <label htmlFor="district" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                        আপনার এনআইডি/পাসপোর্ট অনুযায়ী কোন জেলা প্রতিনিধিত্ব করেন?
+                                    </label>
+                                    {/* <input
                             type="text"
                             name="district"
                             id="district"
@@ -298,112 +392,166 @@ export default function JoinForm()
                             onChange={(e) => setFormValues({ ...formValues, District: e.target.value })}
                             value={formValues.District}
                             className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" /> */}
-                        <div className="w-full">
-                            <Select
-                                value={formValues.District}
-                                onValueChange={(value) => setFormValues({ ...formValues, District: value })}
-                            >
-                                <SelectTrigger
-                                    className={cn(
-                                        "rounded-[10px] px-4 py-3.5 h-auto bg-[#edf4e3]/10 outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 focus:outline-[#86cd58] ring-0 focus:ring-0 text-lg",
-                                    )}
-                                >
-                                    <SelectValue
-                                        placeholder="জেলা নির্বাচন করুন"
-                                    />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <div className="max-h-[300px] overflow-y-auto">
-                                        {DISTRICT.map((district) => (
-                                            <SelectItem
-                                                key={district.name}
-                                                value={district.name}
-                                                className="flex items-center gap-2"
+                                    <div className="w-full">
+                                        <Select
+                                            value={formValues.District}
+                                            onValueChange={(value) => setFormValues({ ...formValues, District: value })}
+                                        >
+                                            <SelectTrigger
+                                                className={cn(
+                                                    "rounded-[10px] px-4 py-3.5 h-auto bg-[#edf4e3]/10 outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 focus:outline-[#86cd58] ring-0 focus:ring-0 text-lg",
+                                                )}
                                             >
-                                                <div className="flex items-center gap-2">
-                                                    <span className="min-w-max text-lg">{district.bn}</span>
+                                                <SelectValue
+                                                    placeholder="জেলা নির্বাচন করুন"
+                                                />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <div className="max-h-[300px] overflow-y-auto">
+                                                    {DISTRICT.map((district) => (
+                                                        <SelectItem
+                                                            key={district.name}
+                                                            value={district.name}
+                                                            className="flex items-center gap-2"
+                                                        >
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="min-w-max text-lg">{district.bn}</span>
+                                                            </div>
+                                                        </SelectItem>
+                                                    ))}
                                                 </div>
-                                            </SelectItem>
-                                        ))}
+                                            </SelectContent>
+                                        </Select>
                                     </div>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                    </div>
-                    <div className="space-y-2">
-                        <label className="lg:text-[22px] text-lg font-medium leading-[33px]">
-                            আপনার পেশা?
-                        </label>
-                        <div className="flex flex-wrap gap-4">
-                            {
-                                showAllOccupations ? occupations.map((occupation) => (
-                                    <div
-                                        key={occupation.slug}
-                                        onClick={() => setFormValues({ ...formValues, Occupassion: occupation.slug })}
-                                        className={`flex items-center space-x-2 cursor-pointer ${formValues.Occupassion === occupation.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
-                                        <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
-                                            <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.Occupassion === occupation.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
-                                        </div>
-                                        <span className="justify-start text-base font-semibold leading-normal">{occupation.name}</span>
-                                    </div>
-                                )) : occupations.slice(0, 3).map((occupation) => (
-                                    <div
-                                        key={occupation.slug}
-                                        onClick={() => setFormValues({ ...formValues, Occupassion: occupation.slug })}
-                                        className={`flex items-center space-x-2 cursor-pointer ${formValues.Occupassion === occupation.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
-                                        <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
-                                            <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.Occupassion === occupation.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
-                                        </div>
-                                        <span className="justify-start text-base font-semibold leading-normal">{occupation.name}</span>
-                                    </div>
-                                ))
-                            }
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                        আপনার পেশা?
+                                    </label>
+                                    <div className="flex flex-wrap gap-4">
+                                        {
+                                            showAllOccupations ? occupations.map((occupation) => (
+                                                <div
+                                                    key={occupation.slug}
+                                                    onClick={() => setFormValues({ ...formValues, Occupassion: occupation.slug })}
+                                                    className={`flex items-center space-x-2 cursor-pointer ${formValues.Occupassion === occupation.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
+                                                    <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
+                                                        <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.Occupassion === occupation.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
+                                                    </div>
+                                                    <span className="justify-start text-base font-semibold leading-normal">{occupation.name}</span>
+                                                </div>
+                                            )) : occupations.slice(0, 3).map((occupation) => (
+                                                <div
+                                                    key={occupation.slug}
+                                                    onClick={() => setFormValues({ ...formValues, Occupassion: occupation.slug })}
+                                                    className={`flex items-center space-x-2 cursor-pointer ${formValues.Occupassion === occupation.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
+                                                    <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
+                                                        <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.Occupassion === occupation.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
+                                                    </div>
+                                                    <span className="justify-start text-base font-semibold leading-normal">{occupation.name}</span>
+                                                </div>
+                                            ))
+                                        }
 
-                            <button onClick={() => setShowAllOccupations(!showAllOccupations)} className="text-lime-300 text-base font-medium leading-normal">
-                                {
-                                    showAllOccupations ? 'View Less' : 'View All'
-                                }
+                                        <button onClick={() => setShowAllOccupations(!showAllOccupations)} className="text-lime-300 text-base font-medium leading-normal">
+                                            {
+                                                showAllOccupations ? 'View Less' : 'View All'
+                                            }
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label htmlFor="url" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                        আপনার সম্পর্কে আমরা কীভাবে জানতে পারি? ex url: LinkedIn, Github, Website, Research Paper, Facebook, etc.
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="url"
+                                        id="url"
+                                        required
+                                        onChange={(e) => setFormValues({ ...formValues, About: e.target.value })}
+                                        value={formValues.About}
+                                        className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
+                                </div>
+                                <div className="space-y-2">
+                                    <label htmlFor="contributionMessage" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                        আপনি কিভাবে আমদেরকে কট্রিবিউট করতে চান? (optional)
+                                    </label>
+                                    <textarea
+                                        name="contributionMessage"
+                                        id="contributionMessage"
+                                        onChange={(e) => setFormValues({ ...formValues, Contribution: e.target.value })}
+                                        value={formValues.Contribution}
+                                        className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
+                                </div>
+                            </form>)
+                    }
+                    {
+                        step === 1 && (
+                            <div className="space-y-6 text-white">
+                                <div className="space-y-2">
+                                    <label htmlFor="idType" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                        আইডি টাইপ
+                                    </label>
+                                    <div className="flex gap-8">
+                                        {
+                                            idTypes.map((idType) => (
+                                                <button key={idType.slug} disabled={idType.slug === 'Passport'} onClick={() => setFormValues({ ...formValues, idType: idType.slug })} className={`flex items-center space-x-2 cursor-pointer ${formValues.Activity === idType.slug ? 'text-[#c7ff7d]' : 'text-white'} ${idType.slug === 'Passport' ? 'opacity-50' : 'opacity-100'} transition-all duration-150 ease-linear`}>
+                                                    <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
+                                                        <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.idType === idType.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
+                                                    </div>
+                                                    <span className="justify-start text-base font-semibold leading-normal">{idType.name}</span>
+                                                </button>
+                                            ))
+                                        }
+
+                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label htmlFor="nid" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                        দয়া করে আপনার NID এর সামনের ও পেছনের অংশ একসাথে স্ক্যান করে আপলোড করুন (PDF অথবা JPG)
+                                    </label>
+                                    <NidUploader files={nid} setFiles={setNid} />
+                                </div>
+                            </div>)
+                    }
+                    {
+                        step === 2 && (
+                            <div className="space-y-6 text-white">
+                                <SignatureForm data={formValues} signature={signatureImage} />
+                                <div className="space-y-2">
+                                    <label htmlFor="nid" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                        আপনার স্বাক্ষর যুক্ত করুন।
+                                    </label>
+                                    <SignatureUploader files={signature} setFiles={setSignature} />
+                                </div>
+                            </div>)
+                    }
+
+                    {
+                        step === 3 && <WelcomeMember name={formValues.Name} />
+                    }
+
+                    <div className="flex gap-4">
+                        {
+                            step < 2 && (<button disabled={!canContinue} onClick={() => setStep(step === 0 ? 1 : step === 1 ? 2 : 0)} className={`px-5 py-3 bg-[#c7ff7d] ${(!canContinue) && 'opacity-50'} rounded-[10px]`}><span className="text-[#1d3200] text-lg font-semibold leading-normal">Continue</span></button>)
+                        }
+
+                        {step === 2 && (
+                            <button onClick={handleSubmit} disabled={!canContinue} className={`px-5 py-3 bg-[#c7ff7d] rounded-[10px] ${(!canContinue) && 'opacity-50'}`}>
+                                <span className="text-[#1d3200] text-lg font-semibold leading-normal">
+                                    {isSubmitting ? 'Loading...' : 'Become Member'}
+                                </span>
                             </button>
-                        </div>
+                        )}
+
+                        {step > 0 && step < 3 && <button onClick={() => setStep(step === 1 ? 0 : step === 2 ? 1 : 0)} className="px-5 py-3 bg-white/25 rounded-[10px]"><span className="text-white text-lg font-semibold leading-normal">Back</span></button>}
+
                     </div>
 
-                    <div className="space-y-2">
-                        <label htmlFor="url" className="lg:text-[22px] text-lg font-medium leading-[33px]">
-                            আপনার সম্পর্কে আমরা কীভাবে জানতে পারি? ex url: LinkedIn, Github, Website, Research Paper, Facebook, etc.
-                        </label>
-                        <input
-                            type="text"
-                            name="url"
-                            id="url"
-                            required
-                            onChange={(e) => setFormValues({ ...formValues, About: e.target.value })}
-                            value={formValues.About}
-                            className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
-                    </div>
-                    <div className="space-y-2">
-                        <label htmlFor="contributionMessage" className="lg:text-[22px] text-lg font-medium leading-[33px]">
-                            আপনি কিভাবে আমদেরকে কট্রিবিউট করতে চান? (optional)
-                        </label>
-                        <textarea
-                            name="contributionMessage"
-                            id="contributionMessage"
-                            onChange={(e) => setFormValues({ ...formValues, Contribution: e.target.value })}
-                            value={formValues.Contribution}
-                            className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
-                    </div>
-                    <div className="space-y-2">
-                        <label htmlFor="contributionMessage" className="lg:text-[22px] text-lg font-medium leading-[33px]">
-                            আপনার NID  এটাচ  করুন।
-                        </label>
-                        <NidUploader files={nid} setFiles={setNid} />
-                    </div>
-
-                    <button type="submit" className="px-5 py-3 bg-[#c7ff7d] rounded-[10px]">
-                        <span className="text-[#1d3200] text-lg font-semibold leading-normal">
-                            {isSubmitting ? 'সাবমিট হচ্ছে...' : 'সাবমিট'}
-                        </span>
-                    </button>
-                </form>
+                </div>
+                <div className="w-72"></div>
             </div>
         </div>
     )
