@@ -3,12 +3,13 @@
 import { NAVIGATION } from "@/config";
 import { cn } from "@/lib/utils";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Icons } from "./icons";
 import { Button } from "./ui/button";
-import { Sheet, SheetContent } from "./ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "./ui/sheet";
 
 export default function Navbar()
 {
@@ -96,8 +97,15 @@ export default function Navbar()
             >
               <Icons.logo className="h-auto w-8" />
             </Link>
-            <div>
-              {/* <SheetTrigger className="ml-2" asChild>
+            <div className="flex items-center gap-2">
+              {/* <Link href="/wishlist" className="w-full">
+                <Button
+                  className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear w-full"
+                >
+                  জয়েন করুন
+                </Button>
+              </Link> */}
+              <SheetTrigger className="ml-2" asChild>
                 <Button
                   variant="outline"
                   size="icon"
@@ -106,18 +114,11 @@ export default function Navbar()
                   <Menu className="h-5 w-5" />
                   <span className="sr-only">Toggle navigation menu</span>
                 </Button>
-              </SheetTrigger> */}
-              <Link href="/wishlist" className="w-full">
-                <Button
-                  className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear w-full"
-                >
-                  জয়েন করুন
-                </Button>
-              </Link>
+              </SheetTrigger>
             </div>
           </div>
           <SheetContent closeButtonClassName="text-[#EDF4E3] bg-black ring-0 focus:ring-0 p-1" side="right" className="bg-[#EDF4E3] py-14 z-[999999] flex flex-col gap-8">
-            {/* <nav className="grid gap-6 text-lg font-medium bg-[#EDF4E3]">
+            <nav className="grid gap-6 text-lg font-medium bg-[#EDF4E3]">
               {NAVIGATION.map((item) => (
                 <SheetClose asChild key={item.href}>
                   <Link
@@ -133,7 +134,7 @@ export default function Navbar()
                   </Link>
                 </SheetClose>
               ))}
-            </nav> */}
+            </nav>
             <Link href="/wishlist" className="w-full">
               <Button
                 className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear w-full"
