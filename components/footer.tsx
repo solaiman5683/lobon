@@ -1,6 +1,7 @@
+import { NAVIGATION } from "@/config";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { Icons } from "./icons";
 
 export default function Footer()
 {
@@ -13,22 +14,22 @@ export default function Footer()
       <div className="container lg:pb-20 pb-8">
         <div className="flex lg:flex-row flex-col items-center justify-between bg-[#EDF4E3] rounded-[20px] gap-8 lg:p-8 p-6">
           <Link href="/" className="flex items-center gap-2 font-semibold">
-            <Icons.logo className="w-32 h-auto" />
+            <Image src="/footer-logo.svg" alt="Logo" width={211} height={190} className="w-[211px] h-auto" />
           </Link>
 
-          {/* <div className="flex-col gap-6 text-lg font-medium flex md:flex-row md:items-center justify-between text-center md:text-left md:text-sm lg:gap-6">
+          <div className="flex-col gap-6 text-lg font-medium flex md:flex-row md:items-center justify-between text-center md:text-left md:text-sm lg:gap-6">
             {NAVIGATION.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-[#1D3200] text-[18px] font-semibold"
+                  "text-[#1D3200] text-[18px] font-semibold relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-[#1D3200] after:scale-x-0 hover:after:scale-x-100 after:transition-all transition-all after:duration-300 after:ease-in-out duration-300 ease-in-out"
                 )}
               >
                 {item.title}
               </Link>
             ))}
-          </div> */}
+          </div>
 
           <div className="space-y-[30px] lg:pr-8">
 
