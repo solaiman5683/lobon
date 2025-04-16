@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import ProgressBarProvider from "./(root)/ProgressBarProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,8 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>)
+{
   return (
     <html lang="en" suppressHydrationWarning>
       <SpeedInsights />
@@ -42,7 +44,9 @@ export default function RootLayout({
           storageKey="swajp-theme"
           disableTransitionOnChange
         >
-          {children}
+          <ProgressBarProvider>
+            {children}
+          </ProgressBarProvider>
         </ThemeProvider>
       </body>
     </html>
