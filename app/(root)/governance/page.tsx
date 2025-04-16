@@ -9,7 +9,7 @@ export default function PlatformPage()
         <div className="bg-[#EDF4E3]">
             <Hero />
             <div className="container pb-12 lg:space-y-20 space-y-6">
-                <Image src="/images/governance.svg" width={900} height={714} alt="Our Governance" className="max-w-[900px] mx-auto h-auto" />
+                <Image src="/images/governance.svg" width={900} height={714} alt="Our Governance" className="max-w-[900px] w-full mx-auto h-auto" />
                 <div className="space-y-6">
                     <h2 className="text-[rgb(29,50,0)] text-3xl md:text-4xl lg:text-5xl font-medium max-w-3xl mx-auto text-center leading-tight">
                         প্রশাসনিক কাঠামো
@@ -28,7 +28,7 @@ export default function PlatformPage()
                     <p className="font-noto-sans font-medium lg:text-[22px] text-base leading-relaxed lg:leading-[33px] text-center max-w-3xl mx-auto text-[#1D3200]">
                         অ্যাডমিনিস্ট্রেটিভ পজিশনের উপর ভিত্তি করে আমাদের সদস্যরা তাদের র‍্যাঙ্ক অনুযায়ী ব্যাজ পাবে। এই ব্যাজগুলোর মাধ্যমে আলাদা পরিচয় প্রকাশ পাবে, যেটা দেখে অন্য মেম্বাররা বুঝতে পারবে কে কোন পজিশনে আছে। এই পরিচয়ের উপর ভিত্তি করেই প্রয়োজন অনুযায়ী কমিউনিকেশন হবে।
                     </p>
-                    <Image src="/images/badge-explain.svg" width={900} height={714} alt="Our Governance" className="max-w-[900px] mx-auto h-auto" />
+                    <Image src="/images/badge-explain.svg" width={900} height={714} alt="Our Governance" className="max-w-[900px] w-full mx-auto h-auto" />
                 </div>
 
                 <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 max-w-[920px] mx-auto">
