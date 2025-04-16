@@ -18,7 +18,7 @@ export default function PlatformPage()
                     <p className="font-noto-sans font-medium lg:text-[22px] text-base leading-relaxed lg:leading-[33px] text-center max-w-3xl mx-auto text-[#1D3200]">
                         আমরা যদি স্ট্রাকচারের ভেতর দিয়ে Deep State লেভেলে আমাদের পার্টি ম্যানেজ করতে চাই, তাহলে আগে বুঝতে হবে অ্যাডমিনিস্ট্রেশন কীভাবে কাজ করে। এইটা মাথায় রেখেই আমরা আমাদের পার্টির অ্যাডমিনিস্ট্রেশনটা গড়ে তুললাম। এর উপর ভিত্তি করেই আমাদের মেম্বাররা অ্যাডমিনিস্ট্রেটিভ র‍্যাঙ্ক পাবে পার্টির ভেতরে।
                     </p>
-                    <Image src="/images/governance-map.svg" width={1920} height={1080} alt="Our Governance" className="w-full h-auto" />
+                    <Image src="/images/governance-map.png" width={1920} height={1080} alt="Our Governance" className="w-full h-auto" />
                 </div>
                 <div className="space-y-6">
                     <h2 className="text-[rgb(29,50,0)] text-3xl md:text-4xl lg:text-5xl font-medium max-w-3xl mx-auto text-center leading-tight">

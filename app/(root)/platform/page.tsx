@@ -19,7 +19,7 @@ export default function PlatformPage()
                 <p className="font-sl font-medium lg:text-[22px] text-base leading-relaxed lg:leading-[33px] text-center max-w-3xl mx-auto text-[#1D3200] mb-8">
                     এখানে আমরা আমাদের প্ল্যাটফর্মের পুরো আর্কিটেকচার দাঁড় করিয়েছি, যেখানে আমরা শুধু একটি রাজনৈতিক দলের মতো নিজেকে গড়ে তুলছি না, বরং এটি হবে একটি সামাজিক প্ল্যাটফর্ম যার মাধ্যমে অনেক সামাজিক সমস্যা ডিজিটালি সমাধান করা যাবে।
                 </p>
-                <Image src="/images/platform-map.svg" alt="platform-map" width={1920} height={1080} className="w-full h-auto" />
+                <Image src="/images/platform-map.png" alt="platform-map" width={1920} height={1080} className="w-full h-auto" />
 
                 <div className="space-y-6 lg:mb-20 mb-8">
                     <h2 className="text-[rgb(29,50,0)] text-3xl md:text-4xl lg:text-5xl font-medium max-w-3xl leading-tight">
