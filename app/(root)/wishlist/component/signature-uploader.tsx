@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-"use client"; // Mark as client component for Next.js App Router
+"use client";
 
-import { useEffect, useRef } from "react";
-import { default as ReactSignatureCanvas, default as SignatureCanvas } from "react-signature-canvas";
+import { useRef } from "react";
+import { default as ReactSignatureCanvas, SignatureCanvas } from "react-signature-canvas";
 
 const SignatureUploader = ({ signature, setSignature }: any) =>
 {
