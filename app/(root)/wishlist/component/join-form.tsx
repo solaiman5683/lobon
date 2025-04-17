@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import { NidUploader } from "./nid-uploader";
 import PhoneInput from "./phoneInput";
 import SignatureForm from "./signature-form";
-import { SignatureUploader } from "./signature-uploader";
+import SignatureUploader from "./signature-uploader";
 import Stepper from "./stepper";
 import WelcomeMember from "./welcome-member";
 
@@ -113,6 +113,23 @@ const occupations = [
     }
 ];
 
+// random 10 digit number
+const memberId = Math.floor(1000000000 + Math.random() * 9000000000).toString();
+
+// Convert base64 to Blob
+const dataURLtoBlob = (dataUrl: string) =>
+{
+    const arr = dataUrl.split(",");
+    const mime = arr[0].match(/:(.*?);/)?.[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
+};
+
 
 const activityTypes = [
     {
@@ -136,7 +153,7 @@ const idTypes = [
     },
 ]
 
-async function postToNocoDB(inputData: any, nidFile: File | null, signatureFile: File | null)
+async function postToNocoDB(inputData: any, nidFile: File | null, signatureFile: any)
 {
     // Handle file upload if a file is provided
     if (nidFile) {
@@ -178,8 +195,11 @@ async function postToNocoDB(inputData: any, nidFile: File | null, signatureFile:
         }
     }
     if (signatureFile) {
+        const blob = dataURLtoBlob(signatureFile);
         const formData = new FormData();
-        formData.append('file', signatureFile);
+        formData.append('file', blob, `signature-${inputData.MemberID}.png`);
+
+        console.log('FormData:', formData.get('file'));
 
         try {
             // Upload the file to NocoDB's storage endpoint
@@ -238,8 +258,7 @@ async function postToNocoDB(inputData: any, nidFile: File | null, signatureFile:
         throw new Error('Record creation failed: ' + (error.response?.data?.message || error.message));
     }
 }
-// random 8 digit number
-const memberId = Math.floor(10000000 + Math.random() * 90000000).toString();
+
 
 export default function JoinForm()
 {
@@ -258,14 +277,16 @@ export default function JoinForm()
         MemberID: memberId,
     });
     const [nid, setNid] = useState<File[]>([]);
-    const [signature, setSignature] = useState<File[]>([]);
+    // const [signature, setSignature] = useState<File[]>([]);
     const [signatureImage, setSignatureImage] = useState<string | null>(null);
     const [step, setStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const QueryClient = useQueryClient();
     const [showAllOccupations, setShowAllOccupations] = useState(false);
 
-    const canContinue = (!!(formValues.Name && formValues.Email && formValues.District && formValues.Occupassion && formValues.About && formValues.Activity && formValues.Phone) && step === 0) || (nid.length > 0 && step === 1) || (step === 2 && !!signature.length);
+    const [signature, setSignature] = useState<string | null>(null);
+
+    const canContinue = (!!(formValues.Name && formValues.Email && formValues.District && formValues.Occupassion && formValues.About && formValues.Activity && formValues.Phone) && step === 0) || (nid.length > 0 && step === 1) || (signature && step === 2);
 
     const handleSubmit = async (e: any) =>
     {
@@ -273,7 +294,7 @@ export default function JoinForm()
         setIsSubmitting(true);
         // send form data to server
         try {
-            await postToNocoDB(formValues, nid[0], signature[0]);
+            await postToNocoDB(formValues, nid[0], signature);
             toast.success('আপনার তথ্য সফলভাবে সাবমিট করা হয়েছে');
 
             // Reset form values
@@ -285,9 +306,9 @@ export default function JoinForm()
                 Occupassion: occupations[0].slug,
                 About: '',
                 Contribution: '',
-                MemberID: Math.floor(10000000 + Math.random() * 90000000).toString(),
+                MemberID: Math.floor(1000000000 + Math.random() * 9000000000).toString(),
             });
-            setSignature([]);
+            setSignature(null);
             setNid([]);
             setStep(prev => prev + 1);
             QueryClient.invalidateQueries({ queryKey: ['usersData'] });
@@ -298,20 +319,6 @@ export default function JoinForm()
             setIsSubmitting(false);
         }
     };
-
-    useEffect(() =>
-    {
-        if (signature.length > 0) {
-            const reader = new FileReader();
-            reader.onload = () =>
-            {
-                setSignatureImage(reader.result as string);
-            };
-            reader.readAsDataURL(signature[0]);
-        } else {
-            setSignatureImage(null);
-        }
-    }, [signature]);
 
     useEffect(() =>
     {
@@ -527,12 +534,12 @@ export default function JoinForm()
                     {
                         step === 2 && (
                             <div className="space-y-6 text-white">
-                                <SignatureForm data={formValues} signature={signatureImage} />
+                                <SignatureForm data={formValues} signature={signature} />
                                 <div className="space-y-2">
                                     <label htmlFor="nid" className="lg:text-[22px] text-lg font-medium leading-[33px]">
                                         আপনার স্বাক্ষর যুক্ত করুন।
                                     </label>
-                                    <SignatureUploader files={signature} setFiles={setSignature} />
+                                    <SignatureUploader signature={signature} setSignature={setSignature} />
                                 </div>
                             </div>)
                     }

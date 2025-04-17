@@ -28,7 +28,7 @@ export default function SignatureForm({ data, signature }: any)
                     স্বাক্ষর:
                     <br />
                     {
-                        signature ? <Image src={signature} alt="Signature" width={100} height={100} className="w-[100px] h-auto" /> : <p className="text-red-500">No signature uploaded</p>
+                        signature ? <Image src={signature} alt="Signature" width={100} height={100} className="h-[50px] w-auto" /> : <p className="text-red-500">No signature uploaded</p>
                     }
                     {/* <Image src={signature} alt="Signature" className="w-full h-auto" /> */}
                     <br /><br />
