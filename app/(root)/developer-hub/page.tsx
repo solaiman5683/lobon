@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { JoinUs } from "../platform/_components/join-us";
 import Hero from "./_components/hero";
 
 
@@ -16,7 +15,7 @@ export default function PlatformPage()
                         আমরা ইতিমধ্যে MVP (Minimum Viable Product) মাথায় রেখে ডেভেলপমেন্ট শুরু করেছি, যেখানে ক্রেডিট ইকোনমি এবং এন্টারপ্রাইজ-গ্রেড কমিউনিকেশন সিস্টেম (যেমন: Discord, Slack)–এর আলোকে কাজ চলছে। সময়ের সঙ্গে সঙ্গে আমাদের বাকি ফিচারগুলো ধাপে ধাপে প্রকাশিত হবে। আপনি যদি এই যাত্রায় অংশ নিতে চান বা অবদান রাখতে চান, তাহলে আমাদের Discord-এ যোগ দিন!
                     </p>
                     <div className="w-[200px] mx-auto space-y-6">
-                        <Link href='https://discord.gg/6bWH7sY2' target="_blank" className="flex items-center justify-center bg-[#86CD58] hover:bg-[#1D3200] hover:text-[#86CD58] text-[#1D3200] text-lg font-semibold py-3 px-5 rounded-full transition-all duration-300 ease-in-out">
+                        <Link href='https://discord.gg/bNqq5kux ' target="_blank" className="flex items-center justify-center bg-[#86CD58] hover:bg-[#1D3200] hover:text-[#86CD58] text-[#1D3200] text-lg font-semibold py-3 px-5 rounded-full transition-all duration-300 ease-in-out">
                             Discord-এ যোগ দিন
                         </Link>
                         <Link href='/platform' className="flex items-center justify-center bg-transparent border-2 border-[#1D3200] hover:bg-[#1D3200] text-[#1D3200] hover:text-[#86CD58] text-lg font-semibold py-3 px-5 rounded-full transition-all duration-300 ease-in-out">
@@ -40,7 +39,7 @@ export default function PlatformPage()
                                     <Link href='https://www.facebook.com/share/g/18qCr3b2zo/' target="_blank">
                                         <Image src="/icons/fb-group.svg" width={44} height={44} alt="Facebook" />
                                     </Link>
-                                    <Link href='https://discord.gg/6bWH7sY2' target="_blank">
+                                    <Link href='https://discord.gg/bNqq5kux ' target="_blank">
                                         <Image src="/icons/discord.svg" width={44} height={44} alt="discord" />
                                     </Link>
                                 </div>

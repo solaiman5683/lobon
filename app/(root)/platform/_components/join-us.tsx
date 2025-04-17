@@ -10,7 +10,7 @@ export const JoinUs = () => <div>
             <Link href='https://www.facebook.com/share/g/18qCr3b2zo/' target="_blank">
                 <Image src="/icons/fb-group.svg" width={44} height={44} alt="Facebook" />
             </Link>
-            <Link href='https://discord.gg/6bWH7sY2' target="_blank">
+            <Link href='https://discord.gg/bNqq5kux ' target="_blank">
                 <Image src="/icons/discord.svg" width={44} height={44} alt="discord" />
             </Link>
         </div>
