@@ -14,7 +14,7 @@ export default function OurRoadmap()
                 <Image src="/images/roadmap.svg" width={1200} height={3355} alt="Next Gen" priority className="h-auto w-full pt-8 pointer-events-none lg:block hidden" />
                 <Image src="/images/roadmap-mobile.svg" width={1200} height={3355} alt="Next Gen" priority className="h-auto w-full pt-8 pointer-events-none lg:hidden" />
 
-                <Link href='/wishlist' className="flex justify-center">
+                <Link href='/join-us' className="flex justify-center">
                     <Button className="bg-[#86CD58] hover:bg-[#86CD58] text-black text-lg font-semibold leading-normal rounded-full px-8 py-3 h-auto">
                         জয়েন করুন
                     </Button>

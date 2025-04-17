@@ -1,21 +1,22 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import ProgressBarProvider from "./(root)/ProgressBarProvider";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Lobon - Social media platform",
-    template: "%s | Lobon - Social media platform",
+    default: "LOBON - Open Source Political Party",
+    template: "%s | LOBON - Open Source Political Party",
   },
-  metadataBase: new URL("https://lobon.com"),
-  description: "A social media platform",
+  metadataBase: new URL("https://lobon.org"),
+  description: "A transparent, open-source political platform where leadership is earned through ideas, contributions, and community impact—not money or influence.",
   twitter: {
     card: "summary_large_image",
   },
@@ -45,7 +46,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <ProgressBarProvider>
-            {children}
+            <TooltipProvider delayDuration={0}>
+              {children}
+            </TooltipProvider>
           </ProgressBarProvider>
         </ThemeProvider>
       </body>

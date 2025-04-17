@@ -19,7 +19,7 @@ export default function Hero()
             </p>
 
             <div className="mb-8">
-                <Link href="/wishlist">
+                <Link href="/join-us">
                     <Button className="text-[#000000] hover:bg-[#86CD58] bg-[#86CD58] px-5 py-3 rounded-full font-hind-siliguri font-semibold text-[18px] leading-[24px]">
                         জয়েন করুন
                     </Button>

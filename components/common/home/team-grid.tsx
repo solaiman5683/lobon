@@ -46,7 +46,7 @@ export default function TeamGrid()
                 </div>
                 <div className="relative z-10 text-center mt-8 space-y-4">
                     <p className="text-center text-[#1d3200] text-3xl font-semibold leading-[33px]">{Math.max((records?.pageInfo?.totalRows || 0), 22)} অন্যান্য</p>
-                    <Link href="/wishlist" className="inline-block">
+                    <Link href="/join-us" className="inline-block">
                         <Button className="bg-[#86cd58] hover:bg-[#88d157] text-black text-lg font-semibold leading-normal rounded-full px-8">
                             জয়েন করুন
                         </Button>

@@ -79,7 +79,7 @@ export default function Navbar()
           </div>
           <div className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:justify-between md:gap-5 md:text-sm lg:gap-6">
             <div className="flex gap-1">
-              <Link href="/wishlist">
+              <Link href="/join-us">
                 <Button
                   className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear hover:scale-110"
                 >
@@ -98,7 +98,7 @@ export default function Navbar()
               <Icons.logo className="h-auto w-8" />
             </Link>
             <div className="flex items-center gap-2">
-              {/* <Link href="/wishlist" className="w-full">
+              {/* <Link href="/join-us" className="w-full">
                 <Button
                   className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear w-full"
                 >
@@ -135,7 +135,7 @@ export default function Navbar()
                 </SheetClose>
               ))}
             </nav>
-            <Link href="/wishlist" className="w-full">
+            <Link href="/join-us" className="w-full">
               <Button
                 className="bg-[#1D3200] hover:text-[#1d3200] text-[#C8FF7D] hover:bg-[#C8FF7D] transition-all duration-300 ease-linear w-full"
               >

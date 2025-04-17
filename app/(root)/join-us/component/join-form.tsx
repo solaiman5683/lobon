@@ -13,6 +13,8 @@ import SignatureForm from "./signature-form";
 import SignatureUploader from "./signature-uploader";
 import Stepper from "./stepper";
 import WelcomeMember from "./welcome-member";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Info } from "lucide-react";
 
 const occupations = [
     {
@@ -277,8 +279,6 @@ export default function JoinForm()
         MemberID: memberId,
     });
     const [nid, setNid] = useState<File[]>([]);
-    // const [signature, setSignature] = useState<File[]>([]);
-    const [signatureImage, setSignatureImage] = useState<string | null>(null);
     const [step, setStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const QueryClient = useQueryClient();
@@ -374,7 +374,23 @@ export default function JoinForm()
                                                     <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
                                                         <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.Activity === activity.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
                                                     </div>
-                                                    <span className="justify-start text-base font-semibold leading-normal">{activity.name}</span>
+                                                    <span className="justify-start text-base font-semibold leading-normal flex gap-2 items-center">
+                                                        {activity.name}
+                                                        {
+                                                            activity.slug === 'Secretly' && <Tooltip>
+                                                                <TooltipTrigger>
+                                                                    <Info size={14} />
+                                                                </TooltipTrigger>
+                                                                <TooltipContent className="p-0 border border-[#86CD58]">
+                                                                    <p className="w-[200px] p-3 text-sm">
+                                                                        <span className="text-white">
+                                                                            আপনার তথ্য  ব্যবহৃত হবে শুধুমাত্র অভ্যন্তরীণ ও প্রশাসনিক প্রয়োজনে — এবং তা সংরক্ষিত থাকবে সর্বোচ্চ গোপনীয়তায়, একদম mission-critical লেভেলে।
+                                                                        </span>
+                                                                    </p>
+                                                                </TooltipContent>
+                                                            </Tooltip>
+                                                        }
+                                                    </span>
                                                 </div>
                                             ))
                                         }
