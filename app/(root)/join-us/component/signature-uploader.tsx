@@ -7,6 +7,7 @@ import { default as ReactSignatureCanvas } from "react-signature-canvas";
 const SignatureUploader = ({ signature, setSignature }: any) =>
 {
     const sigCanvas = useRef<any>(null);
+    // const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
     // Clear the canvas
     const clearCanvas = () =>
@@ -48,8 +49,8 @@ const SignatureUploader = ({ signature, setSignature }: any) =>
                     ref={sigCanvas}
                     penColor="black"
                     canvasProps={{
-                        className: "bg-[#EDF4E3] rounded-lg max-w-full h-auto",
-                        width: 580,
+                        className: "bg-[#EDF4E3] rounded-lg mx-auto",
+                        width: window.innerWidth > 580 ? 580 : (window.innerWidth - 32),
                         height: 200,
                     }}
                     onBegin={() => console.log("Started drawing")}
