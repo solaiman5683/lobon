@@ -343,7 +343,7 @@ export default function JoinForm()
                 )
             }
             <div className="flex gap-8 lg:flex-row flex-col justify-center w-full">
-                <div className="lg:w-72 w-full relative">
+                <div className="lg:w-72 w-full sticky top-10 z-50">
                     {
                         step < 3 && (
                             <Stepper step={step} />

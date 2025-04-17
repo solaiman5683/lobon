@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Stepper({ step }: { step: number })
 {
     return (
-        <div className="sticky lg:top-24 top-10 bg-[#213733] p-4 rounded-[10px] lg:space-y-4">
+        <div className="sticky lg:top-24 top-2 z-10 bg-[#213733] p-4 rounded-[10px] lg:space-y-4">
             <p className="md:block hidden text-white text-base font-semibold font-inter leading-normal tracking-tight">
                 Pick a category
             </p>
