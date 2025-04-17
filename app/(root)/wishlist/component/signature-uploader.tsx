@@ -22,7 +22,7 @@ const SignatureUploader = ({ signature, setSignature }: any) =>
                 ref={sigCanvas}
                 penColor="black"
                 canvasProps={{
-                    className: "bg-[#EDF4E3] rounded-lg",
+                    className: "bg-[#EDF4E3] rounded-lg max-w-full h-auto",
                     width: 580,
                     height: 200,
                 }}
