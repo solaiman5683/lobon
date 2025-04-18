@@ -51,6 +51,13 @@ export default function RootLayout({
             </TooltipProvider>
           </ProgressBarProvider>
         </ThemeProvider>
+
+        <script dangerouslySetInnerHTML={{
+          __html: `!function (t, r, y, d, a, ta, co, ps){if (r.getElementById(a)) return;
+          t[y] = t[y] || function () {(t[y].q = t[y].q || []).push(arguments); };co = r.createElement(d);
+          co.async = true;co.src = "https://datacops.lobon.org/" + d + "?cop_key=" + ta;
+    co.id = a;ps = r.getElementsByTagName(d)[0];ps.parentNode?.insertBefore(co, ps);}
+          (window, document, "datacops", "script", "datacops_script", "e9e9815b9dde60d5b94db9fba33f2f7m9m0syzd");` }}></script>
       </body>
     </html>
   );
