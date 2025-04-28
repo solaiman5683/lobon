@@ -275,8 +275,13 @@ export default function JoinForm()
         Contribution: '',
         Country: '',
         CountryCode: '',
-        idType: idTypes[0].slug,
+        IdType: idTypes[0].slug,
         MemberID: memberId,
+        IdNumber: '',
+        Road: '',
+        Sector: '',
+        SubDistrict: '',
+        PostalCode: '',
     });
     const [nid, setNid] = useState<File[]>([]);
     const [step, setStep] = useState(0);
@@ -307,6 +312,11 @@ export default function JoinForm()
                 About: '',
                 Contribution: '',
                 MemberID: Math.floor(1000000000 + Math.random() * 9000000000).toString(),
+                IdNumber: '',
+                Road: '',
+                Sector: '',
+                SubDistrict: '',
+                PostalCode: '',
             });
             setSignature(null);
             setNid([]);
@@ -528,9 +538,9 @@ export default function JoinForm()
                                     <div className="flex gap-8">
                                         {
                                             idTypes.map((idType) => (
-                                                <button key={idType.slug} disabled={idType.slug === 'Passport'} onClick={() => setFormValues({ ...formValues, idType: idType.slug })} className={`flex items-center space-x-2 cursor-pointer ${formValues.Activity === idType.slug ? 'text-[#c7ff7d]' : 'text-white'} ${idType.slug === 'Passport' ? 'opacity-50' : 'opacity-100'} transition-all duration-150 ease-linear`}>
+                                                <button key={idType.slug} onClick={() => setFormValues({ ...formValues, IdType: idType.slug })} className={`flex items-center space-x-2 cursor-pointer ${formValues.Activity === idType.slug ? 'text-[#c7ff7d]' : 'text-white'} transition-all duration-150 ease-linear`}>
                                                     <div className="w-[22px] h-[22px] relative bg-white/20 rounded-[100px] border-2 border-[#c7ff7d]">
-                                                        <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.idType === idType.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
+                                                        <div className={`w-[10px] h-[10px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#c7ff7d] rounded-[100px] ${formValues.IdType === idType.slug ? 'opacity-100' : 'opacity-0'} transition-all duration-150 ease-linear`} />
                                                     </div>
                                                     <span className="justify-start text-base font-semibold leading-normal">{idType.name}</span>
                                                 </button>
@@ -540,10 +550,81 @@ export default function JoinForm()
                                     </div>
                                 </div>
                                 <div className="space-y-2">
+                                    <label htmlFor="idType" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                        {
+                                            formValues.IdType === 'NID' ? 'আপনার এনআইডি নম্বর' : 'আপনার পাসপোর্ট নম্বর'
+                                        }
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="idNumber"
+                                        id="idNumber"
+                                        required
+                                        onChange={(e) => setFormValues({ ...formValues, IdNumber: e.target.value })}
+                                        value={formValues.IdNumber}
+                                        className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
+                                </div>
+                                <div className="space-y-2">
                                     <label htmlFor="nid" className="lg:text-[22px] text-lg font-medium leading-[33px]">
                                         দয়া করে আপনার NID এর সামনের ও পেছনের অংশ একসাথে স্ক্যান করে আপলোড করুন (PDF অথবা JPG)
                                     </label>
                                     <NidUploader files={nid} setFiles={setNid} />
+                                </div>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <label htmlFor="roadName" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                            রাস্তা/সড়কের নাম
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="roadName"
+                                            id="roadName"
+                                            required
+                                            onChange={(e) => setFormValues({ ...formValues, Road: e.target.value })}
+                                            value={formValues.Road}
+                                            className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label htmlFor="sector" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                            এলাকা/সেক্টর
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="sector"
+                                            id="sector"
+                                            required
+                                            onChange={(e) => setFormValues({ ...formValues, Sector: e.target.value })}
+                                            value={formValues.Sector}
+                                            className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
+                                    </div>
+                                    <div className="space-y-2 col-span-2">
+                                        <label htmlFor="sector" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                            থানা/উপজেলা
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="subDistrict"
+                                            id="subDistrict"
+                                            required
+                                            onChange={(e) => setFormValues({ ...formValues, SubDistrict: e.target.value })}
+                                            value={formValues.SubDistrict}
+                                            className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
+                                    </div>
+                                    <div className="space-y-2 col-span-2">
+                                        <label htmlFor="postalCode" className="lg:text-[22px] text-lg font-medium leading-[33px]">
+                                            পোস্টাল কোড
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="postalCode"
+                                            id="postalCode"
+                                            required
+                                            onChange={(e) => setFormValues({ ...formValues, PostalCode: e.target.value })}
+                                            value={formValues.PostalCode}
+                                            className="px-4 py-3.5 bg-[#edf4e3]/10 rounded-[10px] outline outline-offset-[-1px] outline-[#86cd58] focus:outline-4 w-full text-lg" />
+                                    </div>
+
                                 </div>
                             </div>)
                     }
